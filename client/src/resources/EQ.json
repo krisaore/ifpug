@@ -1,0 +1,49 @@
+{
+   "EQ": [
+		{
+			"det_range": {"min": "1", "max": "5"},
+			"ftr_range": {"min": "1", "max": "1"},
+			"cmplx": "low"
+		},
+		{
+			"det_range": {"min": "1", "max": "5"},
+			"ftr_range": {"min": "2", "max": "3"},
+			"cmplx": "low"
+		},
+		{
+			"det_range": {"min": "1", "max": "5"},
+			"ftr_range": {"min": "4"},
+			"cmplx": "low"
+		},
+		{
+			"det_range": {"min": "6", "max": "19"},
+			"ftr_range": {"min": "1", "max": "1"},
+			"cmplx": "mid"
+		},
+		{
+			"det_range": {"min": "6", "max": "19"},
+			"ftr_range": {"min": "2", "max": "3"},
+			"cmplx": "mid"
+		},
+		{
+			"det_range": {"min": "6", "max": "19"},
+			"ftr_range": {"min": "4"},
+			"cmplx": "mid"
+		},
+		{
+			"det_range": {"min": "20"},
+			"ftr_range": {"min": "1", "max": "1"},
+			"cmplx": "high"
+		},
+		{
+			"det_range": {"min": "20"},
+			"ftr_range": {"min": "2", "max": "3"},
+			"cmplx": "high"
+		},
+		{
+			"det_range": {"min": "20"},
+			"ftr_range": {"min": "4"},
+			"cmplx": "high"
+		}
+   ]
+}

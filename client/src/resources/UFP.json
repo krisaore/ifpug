@@ -1,0 +1,44 @@
+{
+   "UFP": [
+      {
+         "type": "EI",
+         "cmplx": {
+            "low": "3",
+			"mid": "4",
+			"high": "6"
+         }
+      },
+      {
+         "type": "EO",
+         "cmplx": {
+            "low": "4",
+			"mid": "5",
+			"high": "7"
+         }
+      },
+      {
+         "type": "EQ",
+         "cmplx": {
+            "low": "3",
+			"mid": "4",
+			"high": "6"
+         }
+      },
+      {
+         "type": "ILF",
+         "cmplx": {
+            "low": "7",
+			"mid": "10",
+			"high": "15"
+         }
+      },
+      {
+         "type": "EIF",
+         "cmplx": {
+            "low": "5",
+			"mid": "7",
+			"high": "10"
+         }
+      }
+   ]
+}
