@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Table from './components/Table';
+import ButtonBar from './components/ButtonBar';
 
 var FP_LINES = [
   {id: 1, function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
@@ -12,6 +13,7 @@ class App extends Component {
     return (
       <div className="App">
 		<Table lines={FP_LINES} />
+		<ButtonBar/>
       </div>
     );
   }
