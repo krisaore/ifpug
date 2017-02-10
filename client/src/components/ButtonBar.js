@@ -7,7 +7,7 @@ class ButtonBar extends Component {
 		  <div className="row">
 			<div className="col-md-12">
 				<div className="pull-right">
-					<button type="button" className="btn btn-primary btn-circle btn-lg"><i className="glyphicon glyphicon-plus"></i></button>
+					<button type="button" className="btn btn-primary btn-circle btn-lg"><i className="fa fa-plus"></i></button>
 				</div>
 			</div>
 		  </div>
