@@ -20,8 +20,8 @@ class App extends Component {
 		<div className="container">
 			<TitleBar measure_title={MEASURE_TITLE}/>
 			<Table lines={FP_LINES} />
+			<ButtonBar/>
 		</div>
-		<ButtonBar/>
       </div>
     );
   }
