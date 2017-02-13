@@ -29,6 +29,7 @@ class TableRow extends Component {
 		<td>{this.props.line.cplx}</td>
 		<td>{this.props.line.ufp}</td>
 		<td>{this.props.line.notes}</td>
+		<td className="text-center"><span className="fa fa-times-circle" aria-hidden="true" title="Delete"></span></td>
       </tr>
     );
   }

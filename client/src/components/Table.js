@@ -20,6 +20,7 @@ class Table extends Component {
             <th>Complexity</th>
 			<th>UFP</th>
 			<th>Notes</th>
+			<th></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
