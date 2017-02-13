@@ -13,13 +13,34 @@ var FP_LINES = [
 var MEASURE_TITLE = 'My first app measure';
 
 class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      fp_lines: [],
+      measure_title: ''
+    }
+  }
+  
+  componentWillMount(){
+    this.getFPLines();
+    this.getMeasureTitle();
+  }
+  
+  getFPLines(){
+    this.setState({fp_lines: FP_LINES });
+  }
+  
+  getMeasureTitle() {
+	this.setState({measure_title: MEASURE_TITLE });
+  }
+  
   render() {
     return (
       <div className="App">
 		<Navbar/>
 		<div className="container">
-			<TitleBar measure_title={MEASURE_TITLE}/>
-			<Table lines={FP_LINES} />
+			<TitleBar measure_title={this.state.measure_title}/>
+			<Table lines={this.state.fp_lines} />
 			<ButtonBar/>
 		</div>
       </div>
