@@ -13,6 +13,7 @@ class Navbar extends Component {
 					<div className="btn-group btn-group-lg" role="group">
 						<button type="button" className="btn btn-default navbar-btn" aria-label="Load" title="Load measure"><span className="fa fa-database" aria-hidden="true"></span></button>
 						<button type="button" className="btn btn-default navbar-btn" aria-label="Save" title="Save measure"><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
+						<button type="button" className="btn btn-default navbar-btn" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
 					</div>
 				</div>
 			</div>
