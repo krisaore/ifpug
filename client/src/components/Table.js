@@ -10,22 +10,23 @@ class Table extends Component {
   render() {
     var rows = [];
     this.props.lines.forEach(function(line) {
-	  rows.push(<TableRow line={line} key={line.id} onDelLine={this.deleteLine.bind(this, line.id)} />);
+	    rows.push(<TableRow line={line} key={line.id} onDelLine={this.deleteLine.bind(this, line.id)} />);
     }.bind(this));	  
+    
     return (
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-			<th>#</th>
-            <th>Function</th>
+			      <th>#</th>
+            <th className="thirty_percent">Function name</th>
             <th>Operation</th>
             <th>Type</th>
             <th>RET/FTR</th>
             <th>DET</th>
             <th>Complexity</th>
-			<th>UFP</th>
-			<th>Notes</th>
-			<th></th>
+            <th>UFP</th>
+            <th className="thirty_percent">Notes</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>{rows}</tbody>

@@ -17,11 +17,11 @@ class App extends Component {
     super();
     this.state = {
       fp_lines: [],
-      measure_title: ''
+      measure_title: '',
     }
 	
-	this.handleAddEmptyLine = this.handleAddEmptyLine.bind(this);
-	this.handleDeleteLine = this.handleDeleteLine.bind(this);
+    this.handleAddEmptyLine = this.handleAddEmptyLine.bind(this);
+    this.handleDeleteLine = this.handleDeleteLine.bind(this);
   }
   
   componentWillMount(){
@@ -34,14 +34,14 @@ class App extends Component {
   }
   
   getMeasureTitle() {
-	this.setState({measure_title: MEASURE_TITLE });
+	  this.setState({measure_title: MEASURE_TITLE });
   }
   
   handleAddEmptyLine(){
     let fp_lines = this.state.fp_lines;
     fp_lines.push([
-		{id: 0, function_name: '', operation: '', type: '', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''},
-	]);
+		  {id: 0, function_name: '', operation: '', type: '', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''},
+	  ]);
     this.setState({fp_lines:fp_lines});
   }
   
@@ -55,12 +55,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-		<Navbar/>
-		<div className="container">
-			<TitleBar measure_title={this.state.measure_title}/>
-			<Table lines={this.state.fp_lines} onDelLine={this.handleDeleteLine}/>
-			<ButtonBar onEmptyAdd={this.handleAddEmptyLine}/>
-		</div>
+        <Navbar/>
+        <div className="container">
+          <TitleBar measure_title={this.state.measure_title}/>
+          <Table lines={this.state.fp_lines} onDelLine={this.handleDeleteLine}/>
+          <ButtonBar onEmptyAdd={this.handleAddEmptyLine}/>
+        </div>
       </div>
     );
   }

@@ -26,15 +26,15 @@ class TableRow extends Component {
     return (
       <tr>
         <td>{this.props.line.id}</td>
-		<td>{this.props.line.function_name}</td>
+        <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
         <SelectTableCell options={OPERATION_OPTIONS} value={this.props.line.operation} />
-		<SelectTableCell options={TYPE_OPTIONS} value={this.props.line.type} />
-		<td>{this.props.line.ret_ftr}</td>
-		<td>{this.props.line.det}</td>
-		<td>{this.props.line.cplx}</td>
-		<td>{this.props.line.ufp}</td>
-		<td>{this.props.line.notes}</td>
-		<td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}><span className="fa fa-times-circle" aria-hidden="true" title="Delete"></span></td>
+        <SelectTableCell options={TYPE_OPTIONS} value={this.props.line.type} />
+        <td className="text-center"><input type="text" defaultValue={this.props.line.ret_ftr} className="thirty_pixels" /></td>
+        <td className="text-center"><input type="text" defaultValue={this.props.line.det} className="thirty_pixels" /></td>
+        <td className="text-center">{this.props.line.cplx}</td>
+        <td className="text-center">{this.props.line.ufp}</td>
+        <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
+        <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}><span className="fa fa-times-circle" aria-hidden="true" title="Delete"></span></td>
       </tr>
     );
   }

@@ -7,9 +7,9 @@ class ButtonBar extends Component {
 	
   render() {
     return (
-		<div className="pull-right">
-			<button type="button" className="btn btn-primary btn-circle btn-lg" onClick={this.addEmptyLine.bind(this)}><i className="fa fa-plus"></i></button>
-		</div>
+      <div className="pull-right">
+        <button type="button" className="btn btn-primary btn-circle btn-lg" onClick={this.addEmptyLine.bind(this)}><i className="fa fa-plus"></i></button>
+      </div>
     );
   }
 }

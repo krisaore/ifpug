@@ -23,3 +23,15 @@
   line-height: 1.33;
   border-radius: 35px;
 }
+
+.thirty_percent {
+  width: 30%;
+}
+
+.hundred_percent {
+  width: 100%;
+}
+
+.thirty_pixels {
+  width: 30px;
+}
