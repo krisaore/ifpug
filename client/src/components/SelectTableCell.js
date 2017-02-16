@@ -12,7 +12,7 @@ class SelectTableCell extends Component {
     }
     return (
       <td>
-        <select value={this.props.value}>{options}</select>
+        <select defaultValue={this.props.value}>{options}</select>
       </td>
     );
   }

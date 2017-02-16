@@ -2,11 +2,16 @@ import React, { Component } from 'react';
 import TableRow from './TableRow';
 
 class Table extends Component {
+
+  deleteLine(id){
+    this.props.onDelLine(id);
+  }
+  
   render() {
     var rows = [];
     this.props.lines.forEach(function(line) {
-      rows.push(<TableRow line={line} key={line.id} />);
-    });	  
+	  rows.push(<TableRow line={line} key={line.id} onDelLine={this.deleteLine.bind(this, line.id)} />);
+    }.bind(this));	  
     return (
       <table className="table table-bordered table-striped">
         <thead>

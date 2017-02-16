@@ -19,6 +19,9 @@ class App extends Component {
       fp_lines: [],
       measure_title: ''
     }
+	
+	this.handleAddEmptyLine = this.handleAddEmptyLine.bind(this);
+	this.handleDeleteLine = this.handleDeleteLine.bind(this);
   }
   
   componentWillMount(){
@@ -34,14 +37,29 @@ class App extends Component {
 	this.setState({measure_title: MEASURE_TITLE });
   }
   
+  handleAddEmptyLine(){
+    let fp_lines = this.state.fp_lines;
+    fp_lines.push([
+		{id: 0, function_name: '', operation: '', type: '', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''},
+	]);
+    this.setState({fp_lines:fp_lines});
+  }
+  
+  handleDeleteLine(id){
+    let fp_lines = this.state.fp_lines;
+    let index = fp_lines.findIndex(x => x.id === id);
+    fp_lines.splice(index, 1);
+    this.setState({fp_lines:fp_lines});
+  }
+  
   render() {
     return (
       <div className="App">
 		<Navbar/>
 		<div className="container">
 			<TitleBar measure_title={this.state.measure_title}/>
-			<Table lines={this.state.fp_lines} />
-			<ButtonBar/>
+			<Table lines={this.state.fp_lines} onDelLine={this.handleDeleteLine}/>
+			<ButtonBar onEmptyAdd={this.handleAddEmptyLine}/>
 		</div>
       </div>
     );
