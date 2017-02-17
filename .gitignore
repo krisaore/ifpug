@@ -18,9 +18,9 @@ build
 *.o
 *.so
 
-# nodejs log file #
+# log files #
 ######################
-npm-debug.log
+*.log
 
 # OS generated files #
 ######################
@@ -32,3 +32,5 @@ npm-debug.log
 ehthumbs.db
 Thumbs.db
 .env
+desktop.ini
+*.bak
