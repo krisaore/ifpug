@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 
 class SelectTableCell extends Component {
+
+  onChangeLine(id){
+    this.props.onChangeLine(id);
+  }
+
   render() {
     let options;
     if(this.props.options){
@@ -12,7 +17,7 @@ class SelectTableCell extends Component {
     }
     return (
       <td>
-        <select defaultValue={this.props.value}>{options}</select>
+        <select defaultValue={this.props.value} onChange={this.onChangeLine.bind(this, this.props._id)}>{options}</select>
       </td>
     );
   }

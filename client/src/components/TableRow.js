@@ -22,15 +22,19 @@ class TableRow extends Component {
     this.props.onDelLine(id);
   }
 
+  onChangeLine(id){
+    this.props.onChangeLine(id);
+  }
+
   render() {
     return (
       <tr>
-        <td>{this.props.line.id}</td>
+        <td>{this.props.row_index}</td>
         <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
-        <SelectTableCell options={OPERATION_OPTIONS} value={this.props.line.operation} />
-        <SelectTableCell options={TYPE_OPTIONS} value={this.props.line.type} />
-        <td className="text-center"><input type="text" defaultValue={this.props.line.ret_ftr} className="thirty_pixels" /></td>
-        <td className="text-center"><input type="text" defaultValue={this.props.line.det} className="thirty_pixels" /></td>
+        <SelectTableCell options={OPERATION_OPTIONS} value={this.props.line.operation} _id={this.props.line.id} onChangeLine={this.onChangeLine.bind(this)}/>
+        <SelectTableCell options={TYPE_OPTIONS} value={this.props.line.type} _id={this.props.line.id} onChangeLine={this.onChangeLine.bind(this)}/>
+        <td className="text-center"><input type="text" defaultValue={this.props.line.ret_ftr} className="thirty_pixels" onBlur={this.onChangeLine.bind(this, this.props.line.id)}/></td>
+        <td className="text-center"><input type="text" defaultValue={this.props.line.det} className="thirty_pixels" onBlur={this.onChangeLine.bind(this, this.props.line.id)} /></td>
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
         <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
