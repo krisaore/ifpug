@@ -38,7 +38,9 @@ class TableRow extends Component {
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
         <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
-        <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}><span className="fa fa-times-circle" aria-hidden="true" title="Delete"></span></td>
+        <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}>
+          <span className="fa fa-trash" aria-hidden="true" title="Delete"></span>
+        </td>
       </tr>
     );
   }

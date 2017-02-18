@@ -54,9 +54,10 @@ class App extends Component {
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
 
-
-    fp_lines[index].ufp = '6';
-    fp_lines[index].cplx = 'M';
+    console.log(fp_lines[index].det);
+    console.log(fp_lines[index].ret_ftr);    
+    console.log(fp_lines[index].ufp);
+    console.log(fp_lines[index].cplx);
     this.setState({fp_lines:fp_lines});
   }
 
