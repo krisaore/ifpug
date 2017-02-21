@@ -35,6 +35,11 @@ class App extends Component {
 	  this.setState({measure_title: MEASURE_TITLE });
   }
   
+  calculate(data) {
+	  // TODO: do the real calc instead of echo
+	  return data;
+  }
+  
   handleAddEmptyLine(){
     let fp_lines = this.state.fp_lines;
     fp_lines.push(
@@ -50,17 +55,17 @@ class App extends Component {
     this.setState({fp_lines:fp_lines});
   }
 
-  handleChangeLine(id){
+  handleChangeLine(id, changed_data){
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
 
-    console.log(fp_lines[index].det);
-    console.log(fp_lines[index].ret_ftr);    
-    console.log(fp_lines[index].ufp);
-    console.log(fp_lines[index].cplx);
+	// TODO: fix changed_data is undefined
+	
+	changed_data = this.calculate(changed_data);
+	fp_lines[index] = changed_data;
+
     this.setState({fp_lines:fp_lines});
   }
-
   
   render() {
     return (

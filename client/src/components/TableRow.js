@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import SelectTableCell from './SelectTableCell';
-import EditField from './EditField';
+import IFPUGEditField from './IFPUGEditField';
 
 var OPERATION_OPTIONS = [
   {id: 1, value: 'ADD'},
@@ -23,8 +23,8 @@ class TableRow extends Component {
     this.props.onDelLine(id);
   }
 
-  onChangeLine(id){
-    this.props.onChangeLine(id);
+  onChangeLine(id, changed_data){
+    this.props.onChangeLine(id, changed_data);
   }
 
   render() {
@@ -36,7 +36,7 @@ class TableRow extends Component {
         <SelectTableCell options={TYPE_OPTIONS} value={this.props.line.type} _id={this.props.line.id} onChangeLine={this.onChangeLine.bind(this)}/>
         <td className="text-center"><input type="text" defaultValue={this.props.line.ret_ftr} className="thirty_pixels" onBlur={this.onChangeLine.bind(this, this.props.line.id)}/></td>
         {/* <td className="text-center"><input type="text" defaultValue={this.props.line.det} className="thirty_pixels" onBlur={this.onChangeLine.bind(this, this.props.line.id)} /></td> */}
-        <td className="text-center"><EditField value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onBlur={this.onChangeLine.bind(this)} /></td>
+        <td className="text-center"><IFPUGEditField name="det" line={this.props.line} value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
         <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
