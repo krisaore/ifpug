@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import UUID from 'node-uuid';
+import _ from 'lodash';
+
 import Table from './components/Table';
 import ButtonBar from './components/ButtonBar';
 import Navbar from './components/Navbar';
 import TitleBar from './components/TitleBar';
 
 import cmplx_data from './resources/CMPLX.json';
-
-import UUID from 'node-uuid';
-import _ from 'lodash';
-
 
 var FP_LINES = [
   {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
@@ -51,27 +50,33 @@ class App extends Component {
 
     console.log(cmplx_data[type]);
 
-    var cmplx = _.filter(cmplx_data[data.type], function(o) {
-        /*
+    var det_filtered = _.filter(cmplx_data[data.type], function(o) {
+        
         var ret = null;
+        console.log("det: " + data.det);
         console.log(o.det_range);
         if(_.has(o, 'det_range.max')) {
           console.log("esiste max");
-          ret = data.det >= o.det_range.min && data.det < o.det_range.max;
+          console.log("min: " + o.det_range.min);
+          console.log("max: " + o.det_range.max);
+          ret = (data.det >= o.det_range.min && data.det < o.det_range.max);
         } else {
           console.log("non esiste max");
+          console.log("min: " + o.det_range.min);
           ret = data.det >= o.det_range.min;
         }
+        console.log (ret);
 
         return ret;
-        */
+        
         // not working
-        return (_.has(o, 'det_range.max') ? data.det >= o.det_range.min && data.det < o.det_range.max : data.det >= o.det_range.min)
-                ||
-               (_.has(o, 'ret_ftr_range.max') ? data.ret_ftr >= o.ret_ftr_range.min && data.ret_ftr < o.ret_ftr_range.max : data.ret_ftr >= o.ret_ftr_range.min)
+        //return (_.has(o, 'det_range.max') ? data.det >= o.det_range.min && data.det < o.det_range.max : data.det >= o.det_range.min);
+        /*
+                &&
+               (_.has(o, 'ret_ftr_range.max') ? data.ret_ftr >= o.ret_ftr_range.min && data.ret_ftr < o.ret_ftr_range.max : data.ret_ftr >= o.ret_ftr_range.min)*/
     });
 
-    console.log(cmplx);
+    console.log(det_filtered);
 
 	  return data;
   }

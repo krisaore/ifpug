@@ -35,3 +35,15 @@
 .thirty_pixels {
   width: 30px;
 }
+
+.main_nav {
+  background-color: #337ab7;
+}
+
+.navbar-default .navbar-brand {
+  color: #FFFFFF;
+}
+
+.navbar-default .navbar-brand:hover {
+  color: #f9f9f9;
+}

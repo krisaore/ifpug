@@ -142,7 +142,7 @@
    ],
    "ILF": [
 		{
-			"det_range": {"min": "1", "max": "9"},
+			"det_range": {"min": "1", "max": "19"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
 			"cmplx": "L"
 		},
@@ -154,12 +154,12 @@
 		{
 			"det_range": {"min": "1", "max": "19"},
 			"ret_ftr_range": {"min": "6"},
-			"cmplx": "L"
+			"cmplx": "M"
 		},
 		{
 			"det_range": {"min": "20", "max": "50"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
-			"cmplx": "M"
+			"cmplx": "L"
 		},
 		{
 			"det_range": {"min": "20", "max": "50"},
@@ -169,12 +169,12 @@
 		{
 			"det_range": {"min": "20", "max": "50"},
 			"ret_ftr_range": {"min": "6"},
-			"cmplx": "M"
+			"cmplx": "H"
 		},
 		{
 			"det_range": {"min": "51"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
-			"cmplx": "H"
+			"cmplx": "M"
 		},
 		{
 			"det_range": {"min": "51"},
@@ -189,7 +189,7 @@
    ],
    "EIF": [
 		{
-			"det_range": {"min": "1", "max": "9"},
+			"det_range": {"min": "1", "max": "19"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
 			"cmplx": "L"
 		},
@@ -201,12 +201,12 @@
 		{
 			"det_range": {"min": "1", "max": "19"},
 			"ret_ftr_range": {"min": "6"},
-			"cmplx": "L"
+			"cmplx": "M"
 		},
 		{
 			"det_range": {"min": "20", "max": "50"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
-			"cmplx": "M"
+			"cmplx": "L"
 		},
 		{
 			"det_range": {"min": "20", "max": "50"},
@@ -216,12 +216,12 @@
 		{
 			"det_range": {"min": "20", "max": "50"},
 			"ret_ftr_range": {"min": "6"},
-			"cmplx": "M"
+			"cmplx": "H"
 		},
 		{
 			"det_range": {"min": "51"},
 			"ret_ftr_range": {"min": "1", "max": "1"},
-			"cmplx": "H"
+			"cmplx": "M"
 		},
 		{
 			"det_range": {"min": "51"},

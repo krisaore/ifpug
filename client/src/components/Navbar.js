@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Navbar extends Component {
   render() {
     return (
-		<nav className="navbar navbar-default">
+		<nav className="navbar navbar-default main_nav">
 		  <div className="container-fluid">
 				<div className="navbar-header">
 					<a className="navbar-brand" href="#">IFPUG App</a>
