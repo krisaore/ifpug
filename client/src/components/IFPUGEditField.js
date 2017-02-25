@@ -6,39 +6,39 @@ class IFPUGEditField extends Component {
     super();
     this.state = {
       value: '',
-	  line_data: {}
+	  	line_data: {}
     }
   }
 
   componentDidMount(){
     this.setState({value: this.props.value || ''});
-	this.setState({line_data: this.props.line});
+		this.setState({line_data: this.props.line});
   }  
 
   onChange(event) {
-	var curr_data = this.state.line_data;
-	switch (event.target.name) {
-		case 'type':
-			curr_data['type'] = event.target.value;
-		break;
+		var curr_data = this.state.line_data;
+			switch (event.target.name) {
+				case 'type':
+					curr_data['type'] = event.target.value;
+				break;
 
-		case 'det':
-			curr_data['det'] = event.target.value;
-		break;
+				case 'det':
+					curr_data['det'] = event.target.value;
+				break;
 
-		case 'ret_ftr':
-			curr_data['ret_ftr'] = event.target.value;
-		break;
+				case 'ret_ftr':
+					curr_data['ret_ftr'] = event.target.value;
+				break;
 
-		default:
-		break;
-	}
-	  
-	this.setState({value: event.target.value, line_data: curr_data}, function() {
-		if (this.props.onChange !== undefined) {
-			this.props.onChange(this.props._id, this.state.line_data);
+				default:
+				break;
 		}
-	});
+			
+		this.setState({value: event.target.value, line_data: curr_data}, function() {
+			if (this.props.onChange !== undefined) {
+				this.props.onChange(this.props._id, this.state.line_data);
+			}
+		});
   }
 
   render() {

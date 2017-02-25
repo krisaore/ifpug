@@ -7,8 +7,8 @@ class Table extends Component {
     this.props.onDelLine(id);
   }
 
-  onChangeLine(id) {
-    this.props.onChangeLine(id);
+  onChangeLine(id, changed_data) {
+    this.props.onChangeLine(id, changed_data);
   }
   
   render() {
