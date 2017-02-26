@@ -8,10 +8,11 @@ import Navbar from './components/Navbar';
 import TitleBar from './components/TitleBar';
 
 import cmplx_data from './resources/CMPLX.json';
+import ufp_data from './resources/UFP.json';
 
 var FP_LINES = [
   {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
-  {id: UUID.v4(), function_name: 'Funzione prova 2', operation: 'DEL', type: 'EQ', ret_ftr: 3, det: 22, cplx: 'H', ufp: 6, notes: ''},
+  {id: UUID.v4(), function_name: 'Funzione prova 2', operation: 'DEL', type: 'EQ', ret_ftr: 33, det: 22, cplx: 'H', ufp: 6, notes: ''},
   {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'}
 ];
 
@@ -22,13 +23,18 @@ class App extends Component {
     super();
     this.state = {
       fp_lines: [],
-      measure_title: ''
+      measure_title: '',
+      total_fps: 0
     }
   }
   
   componentWillMount(){
     this.getFPLines();
     this.getMeasureTitle();
+  }
+
+  componentDidMount() {
+    this.getTotalFPS();
   }
   
   getFPLines(){
@@ -38,45 +44,26 @@ class App extends Component {
   getMeasureTitle() {
 	  this.setState({measure_title: MEASURE_TITLE });
   }
+
+  getTotalFPS() {
+    var total = _.sumBy(this.state.fp_lines, function(o) { return o.ufp; });
+    this.setState({total_fps: total });
+  }
   
   calculate(data) {
-    var type = data.type;
-    var det = data.det;
-    var ret_ftr = data.ret_ftr;
-
-    console.log(type);
-    console.log(det);
-    console.log(ret_ftr);
-
-    console.log(cmplx_data[type]);
-
-    var det_filtered = _.filter(cmplx_data[data.type], function(o) {
-        
-        var ret = null;
-        console.log("det: " + data.det);
-        console.log(o.det_range);
-        if(_.has(o, 'det_range.max')) {
-          console.log("esiste max");
-          console.log("min: " + o.det_range.min);
-          console.log("max: " + o.det_range.max);
-          ret = (data.det >= o.det_range.min && data.det < o.det_range.max);
-        } else {
-          console.log("non esiste max");
-          console.log("min: " + o.det_range.min);
-          ret = data.det >= o.det_range.min;
-        }
-        console.log (ret);
-
-        return ret;
-        
-        // not working
-        //return (_.has(o, 'det_range.max') ? data.det >= o.det_range.min && data.det < o.det_range.max : data.det >= o.det_range.min);
-        /*
+    var filteredData = _.find(cmplx_data[data.type], function(o) {
+        return (_.has(o, 'det_range.max') ? _.inRange(data.det, o.det_range.min, o.det_range.max) : _.inRange(data.det, o.det_range.min, Infinity))
                 &&
-               (_.has(o, 'ret_ftr_range.max') ? data.ret_ftr >= o.ret_ftr_range.min && data.ret_ftr < o.ret_ftr_range.max : data.ret_ftr >= o.ret_ftr_range.min)*/
+               (_.has(o, 'ret_ftr_range.max') ? _.inRange(data.ret_ftr, o.ret_ftr_range.min, o.ret_ftr_range.max) : _.inRange(data.ret_ftr, o.ret_ftr_range.min, Infinity));
     });
 
-    console.log(det_filtered);
+    var cmplx = _.isUndefined(filteredData) ? 'L' : filteredData.cmplx;
+    var ufp = _.head(_.filter(ufp_data["UFP"], function(o){
+      return o.type === data.type;
+    })).cmplx[cmplx];
+
+    data.cplx = cmplx;
+    data.ufp = ufp;
 
 	  return data;
   }
@@ -100,11 +87,11 @@ class App extends Component {
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
 
-    
     changed_data = this.calculate(changed_data);
     fp_lines[index] = changed_data;
 
     this.setState({fp_lines:fp_lines});
+    this.getTotalFPS();
   }
   
   render() {
@@ -115,6 +102,7 @@ class App extends Component {
           <TitleBar measure_title={this.state.measure_title}/>
           <Table row_index={this.state.row_index} lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
           <ButtonBar onEmptyAdd={this.handleAddEmptyLine.bind(this)}/>
+          <p>total: {this.state.total_fps}</p>
         </div>
       </div>
     );
