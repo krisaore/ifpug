@@ -2,8 +2,37 @@ import React, { Component } from 'react';
 
 class SelectTableCell extends Component {
 
-  onChangeLine(id){
-    this.props.onChangeLine(id);
+  constructor(){
+    super();
+    this.state = {
+	  line_data: {}
+    }
+  }
+
+  componentDidMount(){
+	this.setState({line_data: this.props.line});
+  } 
+
+  onChange(event){
+	var curr_data = this.state.line_data;
+	switch (event.target.name) {
+			case 'type':
+				curr_data['type'] = event.target.value;
+			break;
+
+			case 'operation':
+				curr_data['operation'] = event.target.value;
+			break;
+
+			default:
+			break;
+	}
+		
+	this.setState({value: event.target.value, line_data: curr_data}, function() {
+		if (this.props.onChange !== undefined) {
+			this.props.onChange(this.props._id, this.state.line_data);
+		}
+	});
   }
 
   render() {
@@ -17,7 +46,7 @@ class SelectTableCell extends Component {
     }
     return (
       <td>
-        <select defaultValue={this.props.value} onChange={this.onChangeLine.bind(this, this.props._id)}>{options}</select>
+        <select defaultValue={this.props.value} onChange={this.onChange.bind(this)}>{options}</select>
       </td>
     );
   }

@@ -21,7 +21,7 @@ class Table extends Component {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-			      <th>#</th>
+			<th>#</th>
             <th className="thirty_percent">Function name</th>
             <th>Operation</th>
             <th>Type</th>

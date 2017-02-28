@@ -1,6 +1,6 @@
 - fix calcolo
 - fix totali e gui
-- fix update per select tipologia funzione
+ok fix update per select tipologia funzione ----> da testare
 - setup back end
 - salva
 - carica

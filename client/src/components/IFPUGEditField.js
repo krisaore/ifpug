@@ -6,18 +6,18 @@ class IFPUGEditField extends Component {
     super();
     this.state = {
       value: '',
-	  	line_data: {}
+	  line_data: {}
     }
   }
 
   componentDidMount(){
     this.setState({value: this.props.value || ''});
-		this.setState({line_data: this.props.line});
+	this.setState({line_data: this.props.line});
   }  
 
   onChange(event) {
 		var curr_data = this.state.line_data;
-			switch (event.target.name) {
+		switch (event.target.name) {
 				case 'type':
 					curr_data['type'] = event.target.value;
 				break;
@@ -34,7 +34,7 @@ class IFPUGEditField extends Component {
 				break;
 		}
 			
-		this.setState({value: event.target.value, line_data: curr_data}, function() {
+		this.setState({line_data: curr_data}, function() {
 			if (this.props.onChange !== undefined) {
 				this.props.onChange(this.props._id, this.state.line_data);
 			}
