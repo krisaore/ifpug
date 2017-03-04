@@ -4,17 +4,18 @@ class SelectTableCell extends Component {
 
   constructor(){
     super();
-    this.state = {
-	  line_data: {}
+      this.state = {
+	    line_data: {}
     }
   }
 
   componentDidMount(){
-	this.setState({line_data: this.props.line});
+	  this.setState({line_data: this.props.line});
   } 
 
   onChange(event){
 	var curr_data = this.state.line_data;
+
 	switch (event.target.name) {
 			case 'type':
 				curr_data['type'] = event.target.value;
@@ -46,7 +47,7 @@ class SelectTableCell extends Component {
     }
     return (
       <td>
-        <select defaultValue={this.props.value} onChange={this.onChange.bind(this)}>{options}</select>
+        <select name={this.props.name} defaultValue={this.props.value} onChange={this.onChange.bind(this)}>{options}</select>
       </td>
     );
   }

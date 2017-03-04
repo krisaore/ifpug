@@ -32,8 +32,8 @@ class TableRow extends Component {
       <tr>
         <td>{this.props.row_index}</td>
         <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
-        <SelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChangeLine={this.onChangeLine.bind(this)}/>
-        <SelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChangeLine={this.onChangeLine.bind(this)}/>
+        <SelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
+        <SelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
         <td className="text-center"><IFPUGEditField name="ret_ftr" line={this.props.line} value={this.props.line.ret_ftr} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center"><IFPUGEditField name="det" line={this.props.line} value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center">{this.props.line.cplx}</td>

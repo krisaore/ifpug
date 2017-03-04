@@ -63,7 +63,7 @@ class App extends Component {
     })).cmplx[cmplx];
 
     data.cplx = cmplx;
-    data.ufp = ufp;
+    data.ufp = parseInt(ufp, 10);
 
 	  return data;
   }
@@ -81,6 +81,7 @@ class App extends Component {
     let index = fp_lines.findIndex(x => x.id === id);
     fp_lines.splice(index, 1);
     this.setState({fp_lines:fp_lines});
+    this.getTotalFPS();
   }
 
   handleChangeLine(id, changed_data){
