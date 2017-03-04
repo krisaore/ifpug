@@ -5,8 +5,8 @@ class SelectTableCell extends Component {
   constructor(){
     super();
       this.state = {
-	    line_data: {}
-    }
+	      line_data: {}
+      }
   }
 
   componentDidMount(){

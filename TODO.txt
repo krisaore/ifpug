@@ -1,4 +1,3 @@
-- fix celle non editabili
 - implement gui per totale
 - fix calcolo per righe aggiunte
 - setup back end

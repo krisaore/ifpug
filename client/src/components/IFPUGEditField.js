@@ -29,8 +29,8 @@ class IFPUGEditField extends Component {
 				default:
 				break;
 		}
-			
-		this.setState({line_data: curr_data}, function() {
+		
+	 this.setState({value: event.target.value, line_data: curr_data}, function() {
 			if (this.props.onChange !== undefined) {
 				this.props.onChange(this.props._id, this.state.line_data);
 			}
