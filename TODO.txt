@@ -1,6 +1,6 @@
-- fix calcolo
-- fix totali e gui
-ok fix update per select tipologia funzione ----> da testare
+- fix celle non editabili
+- implement gui per totale
+- fix calcolo per righe aggiunte
 - setup back end
 - salva
 - carica
