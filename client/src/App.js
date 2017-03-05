@@ -5,7 +5,6 @@ import _ from 'lodash';
 import Table from './components/Table';
 import ButtonBar from './components/ButtonBar';
 import Navbar from './components/Navbar';
-import TitleBar from './components/TitleBar';
 
 import cmplx_data from './resources/CMPLX.json';
 import ufp_data from './resources/UFP.json';
@@ -100,12 +99,24 @@ class App extends Component {
       <div className="App">
         <Navbar/>
         <div className="container">
-          <TitleBar measure_title={this.state.measure_title}/>
-          <Table row_index={this.state.row_index} lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <div className="panel-title pull-left seventy_percent">
+                <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
+              </div>
+              <div className="panel-title pull-right">
+                <button type="button" className="btn btn-default" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+              </div>
+              <div className="clearfix"></div>            
+            </div>
+            <div className="panel-body">
+              <p className="text-center ufp">Total UFP: {this.state.total_fps}</p>
+            </div>
+            <Table row_index={this.state.row_index} lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
+          </div>
           <ButtonBar onEmptyAdd={this.handleAddEmptyLine.bind(this)}/>
-          <p>total: {this.state.total_fps}</p>
         </div>
-      </div>
+      </div>      
     );
   }
 }

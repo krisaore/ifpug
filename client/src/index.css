@@ -28,6 +28,14 @@
   width: 30%;
 }
 
+.fifty_percent {
+  width: 50%;
+}
+
+.seventy_percent {
+  width: 70%;
+}
+
 .hundred_percent {
   width: 100%;
 }
@@ -46,4 +54,13 @@
 
 .navbar-default .navbar-brand:hover {
   color: #f9f9f9;
+}
+
+.title {
+  margin-right: 1em;
+  font-size: 18px; 
+}
+
+.ufp {
+  font-size: 35px;
 }
