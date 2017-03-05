@@ -1,9 +1,7 @@
-- implement gui per totale
-- fix calcolo per righe aggiunte
+- favicon
 - setup back end
 - salva
 - carica
 - welcome page
 - configurazione
-- favicon
 - i18n

@@ -61,6 +61,10 @@
   font-size: 18px; 
 }
 
+.first_button {
+  margin-right: 5px;
+}
+
 .ufp {
   font-size: 35px;
 }

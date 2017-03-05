@@ -50,11 +50,14 @@ class App extends Component {
   }
   
   calculate(data) {
+    console.log(data.type);
     var filteredData = _.find(cmplx_data[data.type], function(o) {
         return (_.has(o, 'det_range.max') ? _.inRange(data.det, o.det_range.min, o.det_range.max) : _.inRange(data.det, o.det_range.min, Infinity))
                 &&
                (_.has(o, 'ret_ftr_range.max') ? _.inRange(data.ret_ftr, o.ret_ftr_range.min, o.ret_ftr_range.max) : _.inRange(data.ret_ftr, o.ret_ftr_range.min, Infinity));
     });
+
+    console.log(filteredData);
 
     var cmplx = _.isUndefined(filteredData) ? 'L' : filteredData.cmplx;
     var ufp = _.head(_.filter(ufp_data["UFP"], function(o){
@@ -70,7 +73,7 @@ class App extends Component {
   handleAddEmptyLine(){
     let fp_lines = this.state.fp_lines;
     fp_lines.push(
-		  {id: UUID.v4(), function_name: '', operation: '', type: '', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''}
+		  {id: UUID.v4(), function_name: '', operation: 'ADD', type: 'ILF', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''}
 	  );
     this.setState({fp_lines:fp_lines});
   }
@@ -105,7 +108,8 @@ class App extends Component {
                 <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
               </div>
               <div className="panel-title pull-right">
-                <button type="button" className="btn btn-default" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+                <button type="button" className="btn btn-info first_button" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+                <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure"><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
               </div>
               <div className="clearfix"></div>            
             </div>
