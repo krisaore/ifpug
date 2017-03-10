@@ -2,6 +2,7 @@
 - setup back end
 - salva
 - carica
+- export xls
 - welcome page
 - configurazione
 - i18n

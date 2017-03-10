@@ -6,7 +6,9 @@ class Navbar extends Component {
 		<nav className="navbar navbar-default main_nav">
 		  <div className="container-fluid">
 				<div className="navbar-header">
-					<a className="navbar-brand" href="#">IFPUG App</a>
+				  <a className="navbar-brand" href="#">
+					<span><img className="logo" alt="IFPUG App" src={process.env.PUBLIC_URL + '/brand.png'}/>IFPUG App</span>
+				  </a>
 				</div>
 				<div className="pull-right">
 					<div className="btn-toolbar" role="toolbar">
