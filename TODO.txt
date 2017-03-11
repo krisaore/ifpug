@@ -1,4 +1,3 @@
-- setup back end
 - salva
 - carica
 - export xls

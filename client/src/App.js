@@ -9,14 +9,6 @@ import Navbar from './components/Navbar';
 import cmplx_data from './resources/CMPLX.json';
 import ufp_data from './resources/UFP.json';
 
-var FP_LINES = [
-  {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
-  {id: UUID.v4(), function_name: 'Funzione prova 2', operation: 'DEL', type: 'EQ', ret_ftr: 33, det: 22, cplx: 'H', ufp: 6, notes: ''},
-  {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'}
-];
-
-var MEASURE_TITLE = 'My first app measure';
-
 class App extends Component {
   constructor(){
     super();
@@ -28,20 +20,24 @@ class App extends Component {
   }
   
   componentWillMount(){
-    this.getFPLines();
-    this.getMeasureTitle();
-  }
-
-  componentDidMount() {
-    this.getTotalFPS();
+    this.getDatas();
   }
   
-  getFPLines(){
-    this.setState({fp_lines: FP_LINES });
-  }
-  
-  getMeasureTitle() {
-	  this.setState({measure_title: MEASURE_TITLE });
+  getDatas(){
+    var _that = this;
+    fetch('/api/data', {
+      method: 'get'
+    }).then(function(response) {
+      response.json().then(function(json) {
+        _that.setState({measure_title: json.MEASURE_TITLE });    
+        _that.setState({fp_lines: json.FP_LINES });
+        _that.getTotalFPS();       
+      }).catch(function(err) {
+        // Error :()
+      });    
+    }).catch(function(err) {
+      // Error :(
+    });
   }
 
   getTotalFPS() {
@@ -50,14 +46,11 @@ class App extends Component {
   }
   
   calculate(data) {
-    console.log(data.type);
     var filteredData = _.find(cmplx_data[data.type], function(o) {
         return (_.has(o, 'det_range.max') ? _.inRange(data.det, o.det_range.min, o.det_range.max) : _.inRange(data.det, o.det_range.min, Infinity))
                 &&
                (_.has(o, 'ret_ftr_range.max') ? _.inRange(data.ret_ftr, o.ret_ftr_range.min, o.ret_ftr_range.max) : _.inRange(data.ret_ftr, o.ret_ftr_range.min, Infinity));
     });
-
-    console.log(filteredData);
 
     var cmplx = _.isUndefined(filteredData) ? 'L' : filteredData.cmplx;
     var ufp = _.head(_.filter(ufp_data["UFP"], function(o){
