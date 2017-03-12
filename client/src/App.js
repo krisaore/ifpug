@@ -15,11 +15,12 @@ class App extends Component {
     this.state = {
       fp_lines: [],
       measure_title: '',
-      total_fps: 0
+      total_fps: 0,
+      isLoggedIn: true
     }
   }
   
-  componentWillMount(){
+  componentDidMount(){
     this.getDatas();
   }
   
@@ -94,25 +95,27 @@ class App extends Component {
     return (
       <div className="App">
         <Navbar/>
-        <div className="container">
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <div className="panel-title pull-left seventy_percent">
-                <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
+        {this.state.isLoggedIn &&
+          <div className="container">
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <div className="panel-title pull-left seventy_percent">
+                  <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
+                </div>
+                <div className="panel-title pull-right">
+                  <button type="button" className="btn btn-info first_button" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure"><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
+                </div>
+                <div className="clearfix"></div>            
               </div>
-              <div className="panel-title pull-right">
-                <button type="button" className="btn btn-info first_button" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
-                <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure"><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
+              <div className="panel-body">
+                <p className="text-center ufp">Total UFP: {this.state.total_fps}</p>
               </div>
-              <div className="clearfix"></div>            
+              <Table row_index={this.state.row_index} lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
             </div>
-            <div className="panel-body">
-              <p className="text-center ufp">Total UFP: {this.state.total_fps}</p>
-            </div>
-            <Table row_index={this.state.row_index} lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
+            <ButtonBar onEmptyAdd={this.handleAddEmptyLine.bind(this)}/>
           </div>
-          <ButtonBar onEmptyAdd={this.handleAddEmptyLine.bind(this)}/>
-        </div>
+        }
       </div>      
     );
   }
