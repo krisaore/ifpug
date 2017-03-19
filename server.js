@@ -1,10 +1,16 @@
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const UUID = require('node-uuid');
+const express     = require('express');
+const app         = express();
+const bodyParser  = require('body-parser');
+const UUID        = require('node-uuid');
+var mongoose      = require('mongoose');
+var jwt           = require('jsonwebtoken');
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+var config        = require('./config');
+var User          = require('./server/models/user');
+
+mongoose.connect(config.database);
+app.set('jwt_secret', config.jwt_secret);
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -17,12 +23,90 @@ if (process.env.NODE_ENV === 'production') {
 
 var router = express.Router();
 
+router.post('/authenticate', function(req, res) {
+
+  console.log(req);
+  console.log(req.body);
+  console.log(req.body.username);
+  console.log(req.body.password);
+
+  // find the user
+  User.findOne({
+    name: req.body.username
+  }, function(err, user) {
+
+    if (err) throw err;
+
+    if (!user) {
+      res.json({ success: false, message: 'Authentication failed. User not found.' });
+    } else if (user) {
+
+      // check if password matches
+      if (user.password != req.body.password) {
+        res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+      } else {
+
+        // if user is found and password is right
+        // create a token
+        /*var token = jwt.sign(user, app.get('jwt_secret'), {
+          expiresInMinutes: 1440 // expires in 24 hours
+        });*/
+
+        var token = 'testtttt';
+
+        // return the information including token as JSON
+        res.json({
+          success: true,
+          message: 'OK',
+          token: token
+        });
+      }   
+
+    }
+
+  });
+});
+/*
+// route middleware to verify a token
+router.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, app.get('jwt_secret'), function(err, decoded) {      
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });    
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;    
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    return res.status(403).send({ 
+        success: false, 
+        message: 'No token provided.' 
+    });
+    
+  }
+});
+*/
+
 router.get('/data', function(req, res) {
     var data = {
       FP_LINES: [
         {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
         {id: UUID.v4(), function_name: 'Funzione prova 2', operation: 'DEL', type: 'EQ', ret_ftr: 33, det: 22, cplx: 'H', ufp: 6, notes: ''},
-        {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'}
+        {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'},
+        {id: UUID.v4(), function_name: 'Funzione prova 4', operation: 'ADD', type: 'EIF', ret_ftr: 2, det: 16, cplx: 'L', ufp: 5, notes: 'TEST'},
       ],
       MEASURE_TITLE: 'My first app measure'
     };

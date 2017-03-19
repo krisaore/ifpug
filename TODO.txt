@@ -1,5 +1,10 @@
+- fix body parser
+- fix json web token
+- login
 - salva
 - carica
+- fix titolo misura che ha il defaultvalue
+- register
 - export xls
 - welcome page
 - configurazione

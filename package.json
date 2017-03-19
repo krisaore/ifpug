@@ -11,10 +11,12 @@
     "babel-cli": "^6.23.0",
     "babel-core": "^6.23.1",
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.3.0",
+    "mongoose": "^4.9.0"
   },
   "devDependencies": {
     "node-uuid": "^1.4.7",
-    "concurrently": "^3.4.0"    
+    "concurrently": "^3.4.0"
   }
 }
