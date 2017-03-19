@@ -11,7 +11,7 @@ var User          = require('./server/models/user');
 mongoose.connect(config.database);
 app.set('jwt_secret', config.jwt_secret);
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 
 app.set('port', (process.env.PORT || 3001));
@@ -25,14 +25,13 @@ var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
 
-  console.log(req);
-  console.log(req.body);
+  console.log(req.body);  
   console.log(req.body.username);
   console.log(req.body.password);
 
   // find the user
   User.findOne({
-    name: req.body.username
+    username: req.body.username
   }, function(err, user) {
 
     if (err) throw err;
@@ -57,6 +56,7 @@ router.post('/authenticate', function(req, res) {
         // return the information including token as JSON
         res.json({
           success: true,
+          user: user,
           message: 'OK',
           token: token
         });

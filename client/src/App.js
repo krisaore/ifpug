@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import UUID from 'node-uuid';
 import _ from 'lodash';
+import $ from 'jquery';
 
 import Table from './components/Table';
 import ButtonBar from './components/ButtonBar';
@@ -23,44 +24,42 @@ class App extends Component {
     }
   }
   
-  componentDidMount(){
-    this.getDatas();
-  }
-  
   getDatas(){
     var _that = this;
-    fetch('/api/data', {
-      method: 'get'
-    }).then(function(response) {
-      response.json().then(function(json) {
-        _that.setState({measure_title: json.MEASURE_TITLE, fp_lines: json.FP_LINES });    
-        _that.getTotalFPS();       
-      }).catch(function(err) {
-        // Error :()
-      });    
-    }).catch(function(err) {
-      // Error :(
+    $.ajax({
+      type: 'GET',
+      url: '/api/data',
+    })
+    .done(function(data) {
+        _that.setState({measure_title: data.MEASURE_TITLE, fp_lines: data.FP_LINES });    
+        _that.getTotalFPS();  
+    })
+    .fail(function(jqXhr) {
+      console.log('failed to call server');
     });
   }
 
-  login() {
-    console.log('entrato');
+  login(username, password) {
     var _that = this;
-    fetch('/api/authenticate', {
-      method: 'post'
-    }).then(function(response) {
-      response.json().then(function(json) {
-        if(json.success) {
-          console.log('entrato');
-          _that.setState({isLoggedIn: true, jwt_token: json.token });
-        }
-      }).catch(function(err) {
-        // Error :()
-        console.log(err);
-      });    
-    }).catch(function(err) {
-      // Error :(
-      console.log(err);
+
+    var data = {
+      username: username,
+      password: password,
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/authenticate',
+      data: data
+    })
+    .done(function(data) {
+      if(data.success) {
+        _that.setState({isLoggedIn: true, jwt_token: data.token });
+        _that.getDatas();
+      }
+    })
+    .fail(function(jqXhr) {
+      console.log('failed to call server');
     });
   }
 

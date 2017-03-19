@@ -1,6 +1,6 @@
-- fix body parser
 - fix json web token
-- login
+- protezione url abilitare
+- gestione errori ajax
 - salva
 - carica
 - fix titolo misura che ha il defaultvalue

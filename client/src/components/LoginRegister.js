@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
 
 class LoginRegister extends Component {
-	
+
+  constructor(){
+    super();
+      this.state = {
+	      username: '',
+          password: ''
+      }
+  }
+
+  changeUsername(event) {
+    this.setState({username: event.target.value});
+  }
+
+  changePassword(event) {
+    this.setState({password: event.target.value});
+  }
+
   render() {
     return (
         <div className="container">
@@ -19,7 +35,7 @@ class LoginRegister extends Component {
                                                     <span className="input-group-addon">
                                                         <span className="fa fa-user"></span>
                                                     </span>
-                                                    <input type="text" name="username" className="form-control" placeholder="Username" />
+                                                    <input type="text" name="username" className="form-control" placeholder="Username" onChange={this.changeUsername.bind(this)} />
                                                 </div>
                                             </div>
                                             <div className="form-group">
@@ -28,10 +44,10 @@ class LoginRegister extends Component {
                                                     <span className="input-group-addon">
                                                         <span className="fa fa-key"></span>
                                                     </span>
-                                                    <input type="password" name="password" className="form-control" placeholder="Password" />
+                                                    <input type="password" name="password" className="form-control" placeholder="Password" onChange={this.changePassword.bind(this)} />
                                                 </div>
                                             </div>
-                                            <button type="button" value="login" name="submit" className="btn btn-success btn-block" onClick={this.props.onLogin}>Login</button>
+                                            <button type="button" value="login" name="submit" className="btn btn-success btn-block" onClick={this.props.onLogin.bind(this, this.state.username, this.state.password)}>Login</button>
                                         </form>
                                     </div>
                                 </div>
