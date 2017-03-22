@@ -66,7 +66,7 @@
   font-size: 18px; 
 }
 
-.first_button {
+.button_spacing {
   margin-right: 5px;
 }
 
@@ -88,3 +88,8 @@
 .list-unstyled {
   line-height: 2;
 }
+
+.btn-label {position: relative;left: -12px;display: inline-block;padding: 6px 12px;background: rgba(0,0,0,0.15);border-radius: 3px 0 0 3px;}
+.btn-labeled {padding-top: 0;padding-bottom: 0;}
+.logout-area {margin-top: 20px; color: #FFFFFF}
+.logged-user {margin-right: 10px;}

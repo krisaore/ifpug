@@ -7,6 +7,7 @@ import Table from './components/Table';
 import ButtonBar from './components/ButtonBar';
 import Navbar from './components/Navbar';
 import LoginRegister from './components/LoginRegister';
+import MeasureSelection from './components/MeasureSelection';
 
 import cmplx_data from './resources/CMPLX.json';
 import ufp_data from './resources/UFP.json';
@@ -18,9 +19,10 @@ class App extends Component {
       fp_lines: [],
       measure_title: '',
       total_fps: 0,
-      isLoggedIn: false,
-      loadedMeasure: true,
-      jwt_token: ''
+      isLoggedIn:  false, // || localStorage.getItem('isLoggedIn'),
+      loadedMeasure: false,
+      jwt_token: undefined,//|| localStorage.getItem('jwt_token'),
+      loggedUser: {}, //|| localStorage.getItem('loggedUser')
     }
   }
   
@@ -29,6 +31,7 @@ class App extends Component {
     $.ajax({
       type: 'GET',
       url: '/api/data',
+      beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.state.jwt_token);},
     })
     .done(function(data) {
         _that.setState({measure_title: data.MEASURE_TITLE, fp_lines: data.FP_LINES });    
@@ -54,7 +57,11 @@ class App extends Component {
     })
     .done(function(data) {
       if(data.success) {
-        _that.setState({isLoggedIn: true, jwt_token: data.token });
+        _that.setState({isLoggedIn: true, jwt_token: data.token, loggedUser: data.user });
+        //localStorage.setItem("isLoggedIn", true);
+        //localStorage.setItem("jwt_token", data.token);
+        //localStorage.setItem("loggedUser", data.user);
+
         _that.getDatas();
       }
     })
@@ -116,7 +123,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar loggedIn={this.state.isLoggedIn}/>
+        <Navbar loggedIn={this.state.isLoggedIn} name={this.state.loggedUser.name}/>
         {this.state.isLoggedIn && this.state.loadedMeasure &&
           <div className="container">
             <div className="panel panel-default">
@@ -125,7 +132,8 @@ class App extends Component {
                   <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
                 </div>
                 <div className="panel-title pull-right">
-                  <button type="button" className="btn btn-info first_button" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure"><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure"><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
                 </div>
                 <div className="clearfix"></div>            
@@ -139,7 +147,7 @@ class App extends Component {
           </div>
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
-          <div>Misura non caricata</div>
+          <MeasureSelection />
         }        
         {!this.state.isLoggedIn &&
           <LoginRegister onLogin={this.login.bind(this)}/>

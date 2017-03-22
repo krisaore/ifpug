@@ -2,11 +2,13 @@ const express     = require('express');
 const app         = express();
 const bodyParser  = require('body-parser');
 const UUID        = require('node-uuid');
-var mongoose      = require('mongoose');
-var jwt           = require('jsonwebtoken');
+const mongoose    = require('mongoose');
+const jwt         = require('jsonwebtoken');
+const _           = require('lodash');
 
-var config        = require('./config');
-var User          = require('./server/models/user');
+const config        = require('./config');
+const User          = require('./server/models/user');
+const Measure       = require('./server/models/measure');
 
 mongoose.connect(config.database);
 app.set('jwt_secret', config.jwt_secret);
@@ -21,13 +23,34 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 };
 
+app.get('/setup', function(req, res) {
+
+  User.findOne({ username: 'test' }, function (err, user) {
+    if (err) return handleError(err);
+
+    var m = new Measure({ 
+      name: 'Test Measure 2', 
+      owner: user._id,
+      fp_lines: [
+        {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
+        {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'},
+      ] 
+    });
+
+    m.save(function(err) {
+      if (err) throw err;
+
+      console.log('Measure saved successfully');
+      res.json({ success: true });
+    });
+
+  })
+
+});
+
 var router = express.Router();
 
 router.post('/authenticate', function(req, res) {
-
-  console.log(req.body);  
-  console.log(req.body.username);
-  console.log(req.body.password);
 
   // find the user
   User.findOne({
@@ -51,6 +74,9 @@ router.post('/authenticate', function(req, res) {
           expiresIn : 60*24 // expires in 24 hours
         });
 
+        // remove password field from user object
+        user = _.omit(user.toObject(),'password');
+
         // return the information including token as JSON
         res.json({
           success: true,
@@ -64,7 +90,7 @@ router.post('/authenticate', function(req, res) {
 
   });
 });
-/*
+
 // route middleware to verify a token
 router.use(function(req, res, next) {
 
@@ -96,7 +122,11 @@ router.use(function(req, res, next) {
     
   }
 });
-*/
+
+router.get('/list', function(req, res) {
+  var user_id = req.query.user_id;
+
+});
 
 router.get('/data', function(req, res) {
     var data = {

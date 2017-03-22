@@ -1,5 +1,5 @@
-- fix json web token
-- protezione url abilitare
+- gestire lista misure per utente
+- gestire gli f5
 - gestione errori ajax
 - salva
 - carica
