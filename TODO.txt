@@ -1,10 +1,10 @@
 - gestire lista misure per utente
-- gestire gli f5
-- gestione errori ajax
 - salva
 - carica
+- gestire gli f5
+- gestione errori ajax
 - fix titolo misura che ha il defaultvalue
-- register
+- registrazione
 - export xls
 - welcome page
 - configurazione
