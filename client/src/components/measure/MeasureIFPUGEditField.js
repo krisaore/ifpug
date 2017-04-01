@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class IFPUGEditField extends Component {
+class MeasureIFPUGEditField extends Component {
 
   constructor(){
     super();
@@ -44,4 +44,4 @@ class IFPUGEditField extends Component {
   }
 }
 
-export default IFPUGEditField;
+export default MeasureIFPUGEditField;

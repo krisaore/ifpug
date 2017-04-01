@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import SelectTableCell from './SelectTableCell';
-import IFPUGEditField from './IFPUGEditField';
+import MeasureSelectTableCell from './MeasureSelectTableCell';
+import MeasureIFPUGEditField from './MeasureIFPUGEditField';
 
 var OPERATION_OPTIONS = [
   {id: 1, value: 'ADD'},
@@ -17,7 +17,7 @@ var TYPE_OPTIONS = [
   {id: 5, value: 'EI'}  
 ];
 
-class TableRow extends Component {
+class MeasureTableRow extends Component {
 
   deleteLine(id){
     this.props.onDelLine(id);
@@ -32,10 +32,10 @@ class TableRow extends Component {
       <tr>
         <td>{this.props.row_index}</td>
         <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
-        <SelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
-        <SelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
-        <td className="text-center"><IFPUGEditField name="ret_ftr" line={this.props.line} value={this.props.line.ret_ftr} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
-        <td className="text-center"><IFPUGEditField name="det" line={this.props.line} value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
+        <MeasureSelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
+        <MeasureSelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
+        <td className="text-center"><MeasureIFPUGEditField name="ret_ftr" line={this.props.line} value={this.props.line.ret_ftr} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
+        <td className="text-center"><MeasureIFPUGEditField name="det" line={this.props.line} value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
         <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
@@ -47,4 +47,4 @@ class TableRow extends Component {
   }
 }
 
-export default TableRow;
+export default MeasureTableRow;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class SelectTableCell extends Component {
+class MeasureSelectTableCell extends Component {
 
   constructor(){
     super();
@@ -53,4 +53,4 @@ class SelectTableCell extends Component {
   }
 }
 
-export default SelectTableCell;
+export default MeasureSelectTableCell;

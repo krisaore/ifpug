@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ButtonBar extends Component {
+class MeasureButtonBar extends Component {
   addEmptyLine(){
     this.props.onEmptyAdd();
   }
@@ -14,4 +14,4 @@ class ButtonBar extends Component {
   }
 }
 
-export default ButtonBar;
+export default MeasureButtonBar;

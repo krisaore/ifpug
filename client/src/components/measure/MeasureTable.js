@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import TableRow from './TableRow';
+import MeasureTableRow from './MeasureTableRow';
 
-class Table extends Component {
+class MeasureTable extends Component {
 
   deleteLine(id){
     this.props.onDelLine(id);
@@ -14,7 +14,7 @@ class Table extends Component {
   render() {
     var rows = [];
     this.props.lines.forEach(function(line) {
-	    rows.push(<TableRow line={line} row_index={rows.length + 1} key={line.id} onDelLine={this.deleteLine.bind(this)} onChangeLine={this.onChangeLine.bind(this)}/>);
+	    rows.push(<MeasureTableRow line={line} row_index={rows.length + 1} key={line.id} onDelLine={this.deleteLine.bind(this)} onChangeLine={this.onChangeLine.bind(this)}/>);
     }.bind(this));
     
     return (
@@ -39,4 +39,4 @@ class Table extends Component {
   }
 }
 
-export default Table;
+export default MeasureTable;
