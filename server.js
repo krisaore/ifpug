@@ -126,6 +126,26 @@ router.use(function(req, res, next) {
 router.get('/list', function(req, res) {
   var user_id = req.query.user_id;
 
+  User.findOne({
+    _id: user_id
+  }, function(err, user) {
+    if (err) throw err;
+    if (user) {
+      Measure.find({
+        owner: user
+      }, function(err, measures) {
+        if (err) throw err;
+        if (measures) {
+          res.json({
+            success: true,
+            measures: measures,
+            message: 'OK'
+          });
+        }
+      });
+    }
+  });
+
 });
 
 router.get('/data', function(req, res) {

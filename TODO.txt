@@ -1,4 +1,3 @@
-- gestire lista misure per utente
 - salva
 - carica
 - gestire gli f5

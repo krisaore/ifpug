@@ -11,7 +11,7 @@ class App extends Component {
     super();
     this.state = {
       isLoggedIn:  false, // || localStorage.getItem('isLoggedIn'),
-      loadedMeasure: true,
+      loadedMeasure: false,
       jwt_token: undefined,//|| localStorage.getItem('jwt_token'),
       loggedUser: {}, //|| localStorage.getItem('loggedUser')
     }
@@ -36,8 +36,6 @@ class App extends Component {
         //localStorage.setItem("isLoggedIn", true);
         //localStorage.setItem("jwt_token", data.token);
         //localStorage.setItem("loggedUser", data.user);
-
-        //_that.getDatas();
       }
     })
     .fail(function(jqXhr) {
@@ -53,7 +51,7 @@ class App extends Component {
           <Measure jwt_token={this.state.jwt_token} />
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
-          <MeasureSelection />
+          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser}/>
         }        
         {!this.state.isLoggedIn &&
           <LoginRegister onLogin={this.login.bind(this)}/>
