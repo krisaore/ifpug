@@ -30,7 +30,7 @@ class MeasureTableRow extends Component {
   render() {
     return (
       <tr>
-        <td>{this.props.row_index}</td>
+        <td className="text-center">{this.props.row_index}</td>
         <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
         <MeasureSelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
         <MeasureSelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
@@ -40,7 +40,7 @@ class MeasureTableRow extends Component {
         <td className="text-center">{this.props.line.ufp}</td>
         <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
         <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}>
-          <span className="fa fa-trash" aria-hidden="true" title="Delete"></span>
+          <span className="fa fa-trash line_buttons" aria-hidden="true" title="Delete"></span>
         </td>
       </tr>
     );

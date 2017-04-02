@@ -44,6 +44,10 @@
   width: 30px;
 }
 
+.forty_pixels {
+  width: 40px;
+}
+
 .main_nav {
   background-color: #337ab7;
 }
@@ -94,3 +98,5 @@
 
 .logout-area {margin-top: 20px; color: #FFFFFF}
 .logged-user {margin-right: 10px;}
+
+.line_buttons {padding: 0 5px; cursor: pointer;}

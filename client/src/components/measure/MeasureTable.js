@@ -21,7 +21,7 @@ class MeasureTable extends Component {
       <table className="table table-bordered table-striped">
         <thead>
           <tr>
-			<th>#</th>
+			      <th className="text-center">#</th>
             <th className="thirty_percent">Function name</th>
             <th>Operation</th>
             <th>Type</th>

@@ -23,31 +23,6 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
 };
 
-app.get('/setup', function(req, res) {
-
-  User.findOne({ username: 'test' }, function (err, user) {
-    if (err) return handleError(err);
-
-    var m = new Measure({ 
-      name: 'Test Measure 2', 
-      owner: user._id,
-      fp_lines: [
-        {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
-        {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'},
-      ] 
-    });
-
-    m.save(function(err) {
-      if (err) throw err;
-
-      console.log('Measure saved successfully');
-      res.json({ success: true });
-    });
-
-  })
-
-});
-
 var router = express.Router();
 
 router.post('/authenticate', function(req, res) {

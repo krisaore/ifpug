@@ -31,7 +31,6 @@ class MeasureSelection extends Component {
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })
     .done(function(data) {
-        console.log(data.measures);
         _that.setState({lines: data.measures });    
     })
     .fail(function(jqXhr) {
@@ -39,16 +38,23 @@ class MeasureSelection extends Component {
     });
   }
 
+  handleDeleteLine(id){
+    let lines = this.state.lines;
+    let index = lines.findIndex(x => x.id === id);
+    lines.splice(index, 1);
+    this.setState({lines:lines});
+  }  
+
   render() {
     return (
           <div className="container">
             <div className="panel panel-default">
               <div className="panel-heading">
                 <div className="panel-title">
-                  <strong className="title">Please select a measure to load:</strong>
+                  <strong className="title">Please select a measure:</strong>
                 </div>          
               </div>
-              <MeasureSelectionTable lines={this.state.lines}/>
+              <MeasureSelectionTable lines={this.state.lines} onDelLine={this.handleDeleteLine.bind(this)} />
             </div>
             <MeasureSelectionButtonBar/>
           </div>
