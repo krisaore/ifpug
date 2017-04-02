@@ -43,7 +43,11 @@ class MeasureSelection extends Component {
     let index = lines.findIndex(x => x.id === id);
     lines.splice(index, 1);
     this.setState({lines:lines});
-  }  
+  }
+
+  handleLoadMeasure(id) {
+    this.props.handleLoadMeasure(id);
+  }
 
   render() {
     return (
@@ -54,7 +58,7 @@ class MeasureSelection extends Component {
                   <strong className="title">Please select a measure:</strong>
                 </div>          
               </div>
-              <MeasureSelectionTable lines={this.state.lines} onDelLine={this.handleDeleteLine.bind(this)} />
+              <MeasureSelectionTable lines={this.state.lines} onDelLine={this.handleDeleteLine.bind(this)} onLoadMeasure={this.handleLoadMeasure.bind(this)}/>
             </div>
             <MeasureSelectionButtonBar/>
           </div>

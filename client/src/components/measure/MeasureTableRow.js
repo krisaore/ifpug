@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import MeasureSelectTableCell from './MeasureSelectTableCell';
 import MeasureIFPUGEditField from './MeasureIFPUGEditField';
+import MeasureLineTitleField from './MeasureLineTitleField';
+import MeasureLineNotes from './MeasureLineNotes';
 
 var OPERATION_OPTIONS = [
   {id: 1, value: 'ADD'},
@@ -31,14 +33,14 @@ class MeasureTableRow extends Component {
     return (
       <tr>
         <td className="text-center">{this.props.row_index}</td>
-        <td><input type="text" defaultValue={this.props.line.function_name} className="hundred_percent"/></td>
-        <MeasureSelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
-        <MeasureSelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/>
+        <td><MeasureLineTitleField name="function_name" line={this.props.line} value={this.props.line.function_name} _id={this.props.line.id} className="hundred_percent" onChange={this.onChangeLine.bind(this)}/></td>
+        <td><MeasureSelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/></td>
+        <td><MeasureSelectTableCell options={TYPE_OPTIONS} name="type" line={this.props.line} value={this.props.line.type} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/></td>
         <td className="text-center"><MeasureIFPUGEditField name="ret_ftr" line={this.props.line} value={this.props.line.ret_ftr} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center"><MeasureIFPUGEditField name="det" line={this.props.line} value={this.props.line.det} className="thirty_pixels" _id={this.props.line.id} onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
-        <td><input type="text" defaultValue={this.props.line.notes} className="hundred_percent" /></td>
+        <td><MeasureLineNotes name="notes" line={this.props.line} value={this.props.line.notes} _id={this.props.line.id} className="hundred_percent" onChange={this.onChangeLine.bind(this)} /></td>
         <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}>
           <span className="fa fa-trash line_buttons" aria-hidden="true" title="Delete"></span>
         </td>

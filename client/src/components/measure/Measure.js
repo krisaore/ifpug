@@ -16,23 +16,34 @@ class Measure extends Component {
     this.state = {
       fp_lines: [],
       measure_title: '',
+      measure_id: undefined,
       total_fps: 0
     }
   }
 
-  componentDidMount() {
-    this.getDatas();
+  componentWillMount() {
+    this.setState({measure_id: this.props.measure_id});
   }
 
-  getDatas(){
+  componentDidMount() {
+    this.getDatas(this.state.measure_id);
+  }
+
+  getDatas(measure_id){
     var _that = this;
+    var data = {
+      id: measure_id
+    };
+
     $.ajax({
       type: 'GET',
       url: '/api/data',
+      data: data,
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })
-    .done(function(data) {
-        _that.setState({measure_title: data.MEASURE_TITLE, fp_lines: data.FP_LINES });    
+    .done(function(res_data) {
+        var d = _.first(res_data.data);
+        _that.setState({measure_title: d.name, fp_lines: d.fp_lines });    
         _that.getTotalFPS();  
     })
     .fail(function(jqXhr) {
@@ -88,7 +99,15 @@ class Measure extends Component {
 
     this.setState({fp_lines:fp_lines});
     this.getTotalFPS();
-  }    
+  }
+
+  handleChangedTitle(event) {
+    this.setState({measure_title: event.target.value});
+  }
+
+  handleCloseMeasure() {
+    this.props.handleCloseMeasure();
+  }  
 	
   render() {
     return (
@@ -96,12 +115,12 @@ class Measure extends Component {
             <div className="panel panel-default">
               <div className="panel-heading">
                 <div className="panel-title pull-left seventy_percent">
-                  <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" defaultValue={this.state.measure_title} placeholder="Please enter a name." />
+                  <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" value={this.state.measure_title} placeholder="Please enter a name." onChange={this.handleChangedTitle.bind(this)}/>
                 </div>
                 <div className="panel-title pull-right">
                   <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure"><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
-                  <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure"><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure" onClick={this.handleCloseMeasure.bind(this)}><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
                 </div>
                 <div className="clearfix"></div>            
               </div>

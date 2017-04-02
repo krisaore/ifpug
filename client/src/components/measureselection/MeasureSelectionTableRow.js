@@ -7,6 +7,10 @@ class MeasureSelectionTableRow extends Component {
     this.props.onDelLine(id);
   }
 
+  loadMeasure(id) {
+    this.props.onLoadMeasure(id);
+  }
+
   render() {
     return (
       <tr>
@@ -15,9 +19,9 @@ class MeasureSelectionTableRow extends Component {
         <td>{this.props.line.total_fps}</td>
         <td>{moment(this.props.line.created).format('L')}</td>
         <td>{moment(this.props.line.updated).format('L')}</td>
-        <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line._id)}>
-          <span className="fa fa-pencil line_buttons" aria-hidden="true" title="Modify"></span>
-          <span className="fa fa-trash line_buttons" aria-hidden="true" title="Delete"></span>
+        <td className="text-center">
+          <span className="fa fa-pencil line_buttons" aria-hidden="true" title="Modify" onClick={this.loadMeasure.bind(this, this.props.line._id)}></span>
+          <span className="fa fa-trash line_buttons" aria-hidden="true" title="Delete" onClick={this.deleteLine.bind(this, this.props.line._id)}></span>
         </td>
       </tr>
     );

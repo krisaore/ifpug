@@ -1,8 +1,9 @@
 - salva
 - carica
+- aggiungere undo
+- nuova misura
 - gestire gli f5
 - gestione errori ajax
-- fix titolo misura che ha il defaultvalue
 - registrazione
 - export xls
 - welcome page

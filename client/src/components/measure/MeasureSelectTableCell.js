@@ -46,9 +46,7 @@ class MeasureSelectTableCell extends Component {
       });
     }
     return (
-      <td>
         <select name={this.props.name} defaultValue={this.props.value} onChange={this.onChange.bind(this)}>{options}</select>
-      </td>
     );
   }
 }

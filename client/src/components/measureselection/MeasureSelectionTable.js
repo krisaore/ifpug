@@ -7,10 +7,14 @@ class MeasureSelectionTable extends Component {
     this.props.onDelLine(id);
   }
 
+  loadMeasure(id) {
+    this.props.onLoadMeasure(id);
+  }
+
   render() {
     var rows = [];
     this.props.lines.forEach(function(line) {
-	    rows.push(<MeasureSelectionTableRow line={line} row_index={rows.length + 1} key={line._id} onDelLine={this.deleteLine.bind(this)}/>);
+	    rows.push(<MeasureSelectionTableRow line={line} row_index={rows.length + 1} key={line._id} onDelLine={this.deleteLine.bind(this)} onLoadMeasure={this.loadMeasure.bind(this)}/>);
     }.bind(this));
     
     return (

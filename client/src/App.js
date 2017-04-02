@@ -14,6 +14,7 @@ class App extends Component {
       loadedMeasure: false,
       jwt_token: undefined,//|| localStorage.getItem('jwt_token'),
       loggedUser: {}, //|| localStorage.getItem('loggedUser')
+      measure_id: undefined
     }
   }
 
@@ -42,21 +43,29 @@ class App extends Component {
       console.log('failed to call server');
     });
   }
+
+  handleLoadMeasure(id) {
+    this.setState({loadedMeasure: true, measure_id: id});
+  }
+
+  handleCloseMeasure() {
+    this.setState({loadedMeasure: false, measure_id: undefined});
+  }
   
   render() {
     return (
       <div className="App">
         <Navbar loggedIn={this.state.isLoggedIn} name={this.state.loggedUser.name}/>
         {this.state.isLoggedIn && this.state.loadedMeasure &&
-          <Measure jwt_token={this.state.jwt_token} />
+          <Measure jwt_token={this.state.jwt_token} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
-          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser}/>
+          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser} handleLoadMeasure={this.handleLoadMeasure.bind(this)}/>
         }        
         {!this.state.isLoggedIn &&
           <LoginRegister onLogin={this.login.bind(this)}/>
-        }     
-      </div>      
+        }
+      </div>
     );
   }
 }

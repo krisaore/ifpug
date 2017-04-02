@@ -124,16 +124,18 @@ router.get('/list', function(req, res) {
 });
 
 router.get('/data', function(req, res) {
-    var data = {
-      FP_LINES: [
-        {id: UUID.v4(), function_name: 'Funzione prova 1', operation: 'ADD', type: 'ILF', ret_ftr: 2, det: 15, cplx: 'L', ufp: 7, notes: 'few annotations.'},
-        {id: UUID.v4(), function_name: 'Funzione prova 2', operation: 'DEL', type: 'EQ', ret_ftr: 33, det: 22, cplx: 'H', ufp: 6, notes: ''},
-        {id: UUID.v4(), function_name: 'Funzione prova 3', operation: 'CFP', type: 'EI', ret_ftr: 3, det: 16, cplx: 'H', ufp: 6, notes: 'popolamento iniziale.'},
-        {id: UUID.v4(), function_name: 'Funzione prova 4', operation: 'ADD', type: 'EIF', ret_ftr: 2, det: 16, cplx: 'L', ufp: 5, notes: 'TEST'},
-      ],
-      MEASURE_TITLE: 'My first app measure'
-    };
-    res.json(data);   
+  Measure.find({
+    _id: req.query.id
+  }, function(err, measures) {
+    if (err) throw err;
+    if (measures) {
+      res.json({
+        success: true,
+        data: measures,
+        message: 'OK'
+      });
+    }
+  }); 
 });
 
 app.use('/api', router);
