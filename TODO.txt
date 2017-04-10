@@ -1,5 +1,4 @@
 - salva
-- carica
 - aggiungere undo
 - nuova misura
 - gestire gli f5
