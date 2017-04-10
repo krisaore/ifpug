@@ -1,6 +1,7 @@
-- salva
-- aggiungere undo
+- fix stranezza su ricaricare misura salvata
+- fix visualizzazione date da riepilogo lista misure
 - nuova misura
+- aggiungere undo
 - gestire gli f5
 - gestione errori ajax
 - registrazione

@@ -26,10 +26,10 @@ class Measure extends Component {
   }
 
   componentDidMount() {
-    this.getDatas(this.state.measure_id);
+    this.getMeasureDatas(this.state.measure_id);
   }
 
-  getDatas(measure_id){
+  getMeasureDatas(measure_id){
     var _that = this;
     var data = {
       id: measure_id
@@ -37,7 +37,7 @@ class Measure extends Component {
 
     $.ajax({
       type: 'GET',
-      url: '/api/data',
+      url: '/api/measure',
       data: data,
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })
@@ -49,6 +49,33 @@ class Measure extends Component {
     .fail(function(jqXhr) {
       console.log('failed to call server');
     });
+  }
+
+  saveMeasure() {
+    var _that = this;
+
+    var data = {
+      user_id: this.props.user._id,
+      measure_id: this.state.measure_id,
+      fp_lines: this.state.fp_lines,
+      measure_title: this.state.measure_title,
+      total_fps: this.state.total_fps
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/api/measure',
+      data: data,
+      beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
+    })
+    .done(function(data) {
+      if(data.success) {
+        //TODO da gestire un messaggio
+      }
+    })
+    .fail(function(jqXhr) {
+      console.log('failed to call server');
+    });    
   }
 
   getTotalFPS() {
@@ -119,7 +146,7 @@ class Measure extends Component {
                 </div>
                 <div className="panel-title pull-right">
                   <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
-                  <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure"><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure" onClick={this.saveMeasure.bind(this)}><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure" onClick={this.handleCloseMeasure.bind(this)}><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
                 </div>
                 <div className="clearfix"></div>            

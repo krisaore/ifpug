@@ -57,7 +57,7 @@ class App extends Component {
       <div className="App">
         <Navbar loggedIn={this.state.isLoggedIn} name={this.state.loggedUser.name}/>
         {this.state.isLoggedIn && this.state.loadedMeasure &&
-          <Measure jwt_token={this.state.jwt_token} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
+          <Measure jwt_token={this.state.jwt_token} user={this.state.loggedUser} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
           <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser} handleLoadMeasure={this.handleLoadMeasure.bind(this)}/>

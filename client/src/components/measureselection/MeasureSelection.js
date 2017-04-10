@@ -26,7 +26,7 @@ class MeasureSelection extends Component {
 
     $.ajax({
       type: 'GET',
-      url: '/api/list',
+      url: '/api/measure_list',
       data: data,
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })

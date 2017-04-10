@@ -5,11 +5,13 @@ const UUID = require('node-uuid');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
+const moment = require('moment');
 
 const config = require('./config');
 const User = require('./models/user');
 const Measure = require('./models/measure');
 
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 app.set('jwt_secret', config.jwt_secret);
 
@@ -98,7 +100,7 @@ router.use(function(req, res, next) {
     }
 });
 
-router.get('/list', function(req, res) {
+router.get('/measure_list', function(req, res) {
     var user_id = req.query.user_id;
 
     User.findOne({
@@ -123,7 +125,7 @@ router.get('/list', function(req, res) {
 
 });
 
-router.get('/data', function(req, res) {
+router.get('/measure', function(req, res) {
     Measure.find({
         _id: req.query.id
     }, function(err, measures) {
@@ -135,6 +137,25 @@ router.get('/data', function(req, res) {
                 message: 'OK'
             });
         }
+    });
+});
+
+router.post('/measure', function(req, res) {
+
+    Measure.findOne({ _id: req.body.measure_id }, function (err, m){
+        m.name = req.body.measure_title;
+        m.fp_lines = req.body.fp_lines;
+        m.total_fps = req.body.total_fps;
+        m.updated = moment();
+        m.save(function (err) {
+            if (err) throw err;
+            if (m) {
+                res.json({
+                    success: true,
+                    message: 'OK'
+                });
+            }
+        }); 
     });
 });
 
