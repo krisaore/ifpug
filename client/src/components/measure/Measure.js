@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import UUID from 'node-uuid';
 import _ from 'lodash';
 import $ from 'jquery';
@@ -69,9 +70,7 @@ class Measure extends Component {
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })
     .done(function(data) {
-      if(data.success) {
-        //TODO da gestire un messaggio
-      }
+      console.log('done');
     })
     .fail(function(jqXhr) {
       console.log('failed to call server');
@@ -79,7 +78,8 @@ class Measure extends Component {
   }
 
   getTotalFPS() {
-    var total = _.sumBy(this.state.fp_lines, function(o) { return o.ufp; });
+    var total = _.sumBy(this.state.fp_lines, function(o) { return parseInt(o.ufp, 10); });
+    console.log(total);
     this.setState({total_fps: total });
   }
 

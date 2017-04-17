@@ -1,8 +1,7 @@
-- fix stranezza su totale fp nel ricaricare misura salvata
-- fix visualizzazione date da riepilogo lista misure
 - messaggio di conferma o errore in coda a salvataggio
 - icona per disattivare riga
-- riorinamento righe tabella
+- regole sugli 0 FTR o 0 DET
+- riordinamento righe tabella
 - nuova misura
 - aggiungere undo
 - gestire gli f5
