@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
+
 import UUID from 'node-uuid';
 import _ from 'lodash';
 import $ from 'jquery';
@@ -27,7 +30,9 @@ class Measure extends Component {
   }
 
   componentDidMount() {
-    this.getMeasureDatas(this.state.measure_id);
+    if (this.state.measure_id) {
+      this.getMeasureDatas(this.state.measure_id);
+    }
   }
 
   getMeasureDatas(measure_id){
@@ -70,16 +75,22 @@ class Measure extends Component {
       beforeSend: function(xhr){xhr.setRequestHeader("x-access-token", _that.props.jwt_token);},
     })
     .done(function(data) {
-      console.log('done');
+      if (data.success) {
+        if (!_that.state.measure_id) {
+          _that.setState({measure_id: data._id });
+        }
+        NotificationManager.success('Measure correctly saved.', 'Saved measure');
+      } else {
+        NotificationManager.error(data.message, 'Measure not saved');
+      }
     })
     .fail(function(jqXhr) {
-      console.log('failed to call server');
+      NotificationManager.error('An error occured while saving the measure.', 'Measure not saved');
     });    
   }
 
   getTotalFPS() {
     var total = _.sumBy(this.state.fp_lines, function(o) { return parseInt(o.ufp, 10); });
-    console.log(total);
     this.setState({total_fps: total });
   }
 
@@ -112,6 +123,7 @@ class Measure extends Component {
   handleDeleteLine(id){
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
+
     fp_lines.splice(index, 1);
     this.setState({fp_lines:fp_lines});
     this.getTotalFPS();
@@ -157,6 +169,7 @@ class Measure extends Component {
               <MeasureTable lines={this.state.fp_lines} onDelLine={this.handleDeleteLine.bind(this)} onChangeLine={this.handleChangeLine.bind(this)}/>
             </div>
             <MeasureButtonBar onEmptyAdd={this.handleAddEmptyLine.bind(this)}/>
+            <NotificationContainer/>
           </div>
     );
   }

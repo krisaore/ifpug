@@ -1,13 +1,15 @@
-- messaggio di conferma o errore in coda a salvataggio
-- icona per disattivare riga
-- regole sugli 0 FTR o 0 DET
-- riordinamento righe tabella
-- nuova misura
-- aggiungere undo
-- gestire gli f5
-- gestione errori ajax
-- registrazione
-- export xls
+### known bugs ###
+- missing validations
+- better ifpug rules are needed (for instence: 0 FTR or 0 DET rules)
+- f5 logouts users
+- ajax errors management needs improvements
+
+### future features ###
+- add an icon to disable a row
+- line reordering handle
+- undo management
+- user registration
+- xls export
 - welcome page
-- configurazione
+- configuration
 - i18n

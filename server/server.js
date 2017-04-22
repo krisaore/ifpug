@@ -100,18 +100,31 @@ router.use(function(req, res, next) {
     }
 });
 
+// find the measure list for a user
 router.get('/measure_list', function(req, res) {
     var user_id = req.query.user_id;
 
     User.findOne({
         _id: user_id
     }, function(err, user) {
-        if (err) throw err;
+        if (err) {
+            res.json({
+                success: false,
+                message: err
+            });                
+            throw err;
+        }
         if (user) {
             Measure.find({
                 owner: user
             }, function(err, measures) {
-                if (err) throw err;
+                if (err) {
+                    res.json({
+                        success: false,
+                        message: err
+                    });                
+                    throw err;
+                }
                 if (measures) {
                     res.json({
                         success: true,
@@ -125,11 +138,18 @@ router.get('/measure_list', function(req, res) {
 
 });
 
+// find a measure by id
 router.get('/measure', function(req, res) {
     Measure.find({
         _id: req.query.id
     }, function(err, measures) {
-        if (err) throw err;
+        if (err) {
+            res.json({
+                success: false,
+                message: err
+            });                
+            throw err;
+        }
         if (measures) {
             res.json({
                 success: true,
@@ -140,22 +160,77 @@ router.get('/measure', function(req, res) {
     });
 });
 
+// save or update a measure
 router.post('/measure', function(req, res) {
 
     Measure.findOne({ _id: req.body.measure_id }, function (err, m){
-        m.name = req.body.measure_title;
-        m.fp_lines = req.body.fp_lines;
-        m.total_fps = req.body.total_fps;
-        m.updated = moment();
-        m.save(function (err) {
-            if (err) throw err;
-            if (m) {
+        if (m) {
+            m.name = req.body.measure_title;
+            m.fp_lines = req.body.fp_lines;
+            m.total_fps = req.body.total_fps;
+            m.updated = moment();
+            m.save(function (err) {
+                if (err) {
+                    res.json({
+                        success: false,
+                        message: err
+                    });                
+                    throw err;
+                }
                 res.json({
+                    _id: m._id,
                     success: true,
                     message: 'OK'
                 });
+            });
+        } else {
+            User.findOne({
+                _id: req.body.user_id
+            }, function(err, user) {
+                if (err) throw err;
+                if (user) {
+                    var measure = new Measure({ name: req.body.measure_title,
+                                                fp_lines: req.body.fp_lines,
+                                                total_fps: req.body.total_fps,
+                                                created: moment(),
+                                                update: moment(),
+                                                owner: user});
+                    measure.save(function (err) {
+                        if (err) {
+                            res.json({
+                                success: false,
+                                message: err
+                            });                
+                            throw err;
+                        }
+                        res.json({
+                            _id: measure._id,
+                            success: true,
+                            message: 'OK'
+                        });
+                    });                    
+                }
+            });
+        }
+    });
+});
+
+// delete a measure
+router.delete('/measure', function(req, res) {
+    Measure.findOne({ _id: req.body.measure_id }, function (err, m){
+        m.remove(function (err) {
+            if (err) {
+                res.json({
+                    success: false,
+                    message: err
+                });                
+                throw err;
             }
-        }); 
+            res.json({
+                success: true,
+                message: 'OK'
+            });
+        });
     });
 });
 

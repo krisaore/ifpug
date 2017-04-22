@@ -51,7 +51,11 @@ class App extends Component {
   handleCloseMeasure() {
     this.setState({loadedMeasure: false, measure_id: undefined});
   }
-  
+
+  handleNewMeasure() {
+    this.setState({loadedMeasure: true});
+  }
+
   render() {
     return (
       <div className="App">
@@ -60,7 +64,7 @@ class App extends Component {
           <Measure jwt_token={this.state.jwt_token} user={this.state.loggedUser} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
-          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser} handleLoadMeasure={this.handleLoadMeasure.bind(this)}/>
+          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser} handleLoadMeasure={this.handleLoadMeasure.bind(this)} handleNewMeasure={this.handleNewMeasure.bind(this)}/>
         }        
         {!this.state.isLoggedIn &&
           <LoginRegister onLogin={this.login.bind(this)}/>
