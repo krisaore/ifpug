@@ -1,8 +1,6 @@
 ### known bugs ###
 - missing validations
 - better ifpug rules are needed (for instence: 0 FTR or 0 DET rules)
-- f5 logouts users
-- ajax errors management needs improvements
 
 ### future features ###
 - add an icon to disable a row

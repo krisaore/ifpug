@@ -53,7 +53,7 @@ class Measure extends Component {
         _that.getTotalFPS();  
     })
     .fail(function(jqXhr) {
-      console.log('failed to call server');
+      NotificationManager.error(JSON.parse(jqXhr.responseText).message, 'Login error');
     });
   }
 
@@ -80,12 +80,10 @@ class Measure extends Component {
           _that.setState({measure_id: data._id });
         }
         NotificationManager.success('Measure correctly saved.', 'Saved measure');
-      } else {
-        NotificationManager.error(data.message, 'Measure not saved');
       }
     })
     .fail(function(jqXhr) {
-      NotificationManager.error('An error occured while saving the measure.', 'Measure not saved');
+      NotificationManager.error(JSON.parse(jqXhr.responseText).message, 'Login error');
     });    
   }
 

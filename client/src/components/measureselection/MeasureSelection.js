@@ -38,7 +38,7 @@ class MeasureSelection extends Component {
         _that.setState({lines: data.measures });    
     })
     .fail(function(jqXhr) {
-      console.log('failed to call server');
+      NotificationManager.error(JSON.parse(jqXhr.responseText).message, 'Login error');
     });
   }
 
@@ -66,12 +66,10 @@ class MeasureSelection extends Component {
         _that.setState({lines:lines});
 
         NotificationManager.success('Measure correctly deleted.', 'Measure deleted');
-      } else {
-        NotificationManager.error(data.message, 'Measure not saved');
       }
     })
     .fail(function(jqXhr) {
-      NotificationManager.error('An error occured while deleting the measure.', 'Measure not deleted');
+      NotificationManager.error(JSON.parse(jqXhr.responseText).message, 'Login error');
     });
   }
 

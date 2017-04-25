@@ -37,12 +37,12 @@ router.post('/authenticate', function(req, res) {
         if (err) throw err;
 
         if (!user) {
-            res.json({ success: false, message: 'Authentication failed. User not found.' });
+            res.status(500).json({ success: false, message: 'Authentication failed. User not found.' });
         } else if (user) {
 
             // check if password matches
             if (user.password != req.body.password) {
-                res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+                res.status(500).json({ success: false, message: 'Authentication failed. Wrong password.' });
             } else {
 
                 // if user is found and password is right
@@ -76,7 +76,6 @@ router.use(function(req, res, next) {
 
     // decode token
     if (token) {
-
         // verifies secret and checks exp
         jwt.verify(token, app.get('jwt_secret'), function(err, decoded) {
             if (err) {
@@ -87,16 +86,12 @@ router.use(function(req, res, next) {
                 next();
             }
         });
-
     } else {
-
-        // if there is no token
-        // return an error
+        // if there is no token return an error
         return res.status(403).send({
             success: false,
             message: 'No token provided.'
         });
-
     }
 });
 
@@ -108,9 +103,9 @@ router.get('/measure_list', function(req, res) {
         _id: user_id
     }, function(err, user) {
         if (err) {
-            res.json({
+            res.status(500).json({
                 success: false,
-                message: err
+                message: "An error occurred while retrieving measures list."
             });                
             throw err;
         }
@@ -119,9 +114,9 @@ router.get('/measure_list', function(req, res) {
                 owner: user
             }, function(err, measures) {
                 if (err) {
-                    res.json({
+                    res.status(500).json({
                         success: false,
-                        message: err
+                        message: "An error occurred while retrieving measures list."
                     });                
                     throw err;
                 }
@@ -144,9 +139,9 @@ router.get('/measure', function(req, res) {
         _id: req.query.id
     }, function(err, measures) {
         if (err) {
-            res.json({
+            res.status(500).json({
                 success: false,
-                message: err
+                message: "An error occurred while retrieving measures list."
             });                
             throw err;
         }
@@ -164,6 +159,13 @@ router.get('/measure', function(req, res) {
 router.post('/measure', function(req, res) {
 
     Measure.findOne({ _id: req.body.measure_id }, function (err, m){
+        if (err) {
+            res.status(500).json({
+                success: false,
+                message: "An error occured while saving the measure."
+            });
+            throw err;
+        }        
         if (m) {
             m.name = req.body.measure_title;
             m.fp_lines = req.body.fp_lines;
@@ -171,10 +173,10 @@ router.post('/measure', function(req, res) {
             m.updated = moment();
             m.save(function (err) {
                 if (err) {
-                    res.json({
+                    res.status(500).json({
                         success: false,
-                        message: err
-                    });                
+                        message: "An error occured while saving the measure."
+                    });
                     throw err;
                 }
                 res.json({
@@ -187,7 +189,13 @@ router.post('/measure', function(req, res) {
             User.findOne({
                 _id: req.body.user_id
             }, function(err, user) {
-                if (err) throw err;
+                if (err) {
+                    res.status(500).json({
+                        success: false,
+                        message: "An error occured while saving the measure."
+                    });
+                    throw err;
+                }
                 if (user) {
                     var measure = new Measure({ name: req.body.measure_title,
                                                 fp_lines: req.body.fp_lines,
@@ -197,9 +205,9 @@ router.post('/measure', function(req, res) {
                                                 owner: user});
                     measure.save(function (err) {
                         if (err) {
-                            res.json({
+                            res.status(500).json({
                                 success: false,
-                                message: err
+                                message: "An error occured while saving the measure."
                             });                
                             throw err;
                         }
@@ -222,7 +230,7 @@ router.delete('/measure', function(req, res) {
             if (err) {
                 res.json({
                     success: false,
-                    message: err
+                    message: "An error occured while deleting the measure."
                 });                
                 throw err;
             }
