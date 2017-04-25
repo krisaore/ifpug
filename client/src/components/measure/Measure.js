@@ -61,7 +61,7 @@ class Measure extends Component {
     var _that = this;
 
     var data = {
-      user_id: this.props.user._id,
+      user_id: this.props.userid,
       measure_id: this.state.measure_id,
       fp_lines: this.state.fp_lines,
       measure_title: this.state.measure_title,

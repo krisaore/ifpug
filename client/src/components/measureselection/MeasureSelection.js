@@ -25,7 +25,7 @@ class MeasureSelection extends Component {
     var _that = this;
 
     var data = {
-      user_id: this.props.user._id
+      user_id: this.props.userid
     }
 
     $.ajax({

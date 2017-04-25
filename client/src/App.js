@@ -13,7 +13,8 @@ class App extends Component {
       isLoggedIn:  false, // || localStorage.getItem('isLoggedIn'),
       loadedMeasure: false,
       jwt_token: undefined,//|| localStorage.getItem('jwt_token'),
-      loggedUser: {}, //|| localStorage.getItem('loggedUser')
+      loggedUserName: undefined, //|| localStorage.getItem('loggedUser')
+      loggedUserId: undefined,
       measure_id: undefined
     }
   }
@@ -33,7 +34,7 @@ class App extends Component {
     })
     .done(function(data) {
       if(data.success) {
-        _that.setState({isLoggedIn: true, jwt_token: data.token, loggedUser: data.user });
+        _that.setState({isLoggedIn: true, jwt_token: data.token, loggedUserName: data.user.name, loggedUserId: data.user._id });
         //localStorage.setItem("isLoggedIn", true);
         //localStorage.setItem("jwt_token", data.token);
         //localStorage.setItem("loggedUser", data.user);
@@ -59,12 +60,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navbar loggedIn={this.state.isLoggedIn} name={this.state.loggedUser.name}/>
+        <Navbar loggedIn={this.state.isLoggedIn} name={this.state.loggedUserName}/>
         {this.state.isLoggedIn && this.state.loadedMeasure &&
-          <Measure jwt_token={this.state.jwt_token} user={this.state.loggedUser} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
+          <Measure jwt_token={this.state.jwt_token} userid={this.state.loggedUserId} measure_id={this.state.measure_id} handleCloseMeasure={this.handleCloseMeasure.bind(this)}/>
         }
         {this.state.isLoggedIn && !this.state.loadedMeasure &&
-          <MeasureSelection jwt_token={this.state.jwt_token} user={this.state.loggedUser} handleLoadMeasure={this.handleLoadMeasure.bind(this)} handleNewMeasure={this.handleNewMeasure.bind(this)}/>
+          <MeasureSelection jwt_token={this.state.jwt_token} userid={this.state.loggedUserId} handleLoadMeasure={this.handleLoadMeasure.bind(this)} handleNewMeasure={this.handleNewMeasure.bind(this)}/>
         }        
         {!this.state.isLoggedIn &&
           <LoginRegister onLogin={this.login.bind(this)}/>
