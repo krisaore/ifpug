@@ -93,6 +93,21 @@ class Measure extends Component {
   }
 
   calculate(data) {
+
+    // check for zeros or empty values on dets and defaults it on 1
+    if (data.det === "0" || data.det.length === 0) {
+      data.det = "1";
+    }
+
+    // check for zeros or empty values on ret and ftr and defaults it on 1 for EQ and 0 for anything else
+    if (data.ret_ftr === "0" || data.ret_ftr.length === 0) {
+      if (data.type === "EQ") {
+        data.ret_ftr = "1";
+      } else {
+        data.ret_ftr = "0";
+      }
+    }
+
     var filteredData = _.find(cmplx_data[data.type], function(o) {
         return (_.has(o, 'det_range.max') ? _.inRange(data.det, o.det_range.min, o.det_range.max) : _.inRange(data.det, o.det_range.min, Infinity))
                 &&

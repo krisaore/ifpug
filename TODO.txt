@@ -1,6 +1,4 @@
 ### known bugs ###
-- missing validations
-- better ifpug rules are needed (for instence: 0 FTR or 0 DET rules)
 - refactor server side routes
 
 ### future features ###

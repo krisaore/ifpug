@@ -10,6 +10,10 @@ class MeasureIFPUGEditField extends Component {
     }
   }
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({value: nextProps.value});
+	}
+
   componentDidMount(){
     this.setState({value: this.props.value || ''});
 		this.setState({line_data: this.props.line});
