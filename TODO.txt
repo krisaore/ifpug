@@ -1,5 +1,5 @@
 ### known bugs ###
-- refactor server side routes
+- better use jwt token, e.g. use the expiration time
 
 ### future features ###
 - add an icon to disable a row

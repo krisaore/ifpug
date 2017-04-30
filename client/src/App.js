@@ -25,16 +25,6 @@ class App extends Component {
     this.state = initialState;
   }
 
-  componentDidMount() {
-    //handle windows closing
-    window.addEventListener('beforeunload', this.logout);
-  }
-
-  componentWillUnmount() {
-    //handle windows closing
-    window.removeEventListener('beforeunload', this.logout);
-  }
-
   login(username, password) {
     var _that = this;
 
