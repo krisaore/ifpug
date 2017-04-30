@@ -1,5 +1,4 @@
 ### known bugs ###
-- provare login e chiusura browser e rientrare per vedere se rimane per caso loggato
 - missing validations
 - better ifpug rules are needed (for instence: 0 FTR or 0 DET rules)
 - refactor server side routes
