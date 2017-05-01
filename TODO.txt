@@ -2,10 +2,11 @@
 - better use jwt token, e.g. use the expiration time
 
 ### future features ###
-- line reordering handle
 - undo management
+- line reordering handle
 - user registration
 - measure sharing
+- at login -> press enter to login
 - xls export
 - welcome page
 - configuration

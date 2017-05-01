@@ -172,6 +172,9 @@ class Measure extends Component {
                   <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" value={this.state.measure_title} placeholder="Please enter a name." onChange={this.handleChangedTitle.bind(this)}/>
                 </div>
                 <div className="panel-title pull-right">
+                  <button type="button" className="btn btn-info button_spacing pull-left" aria-label="Undo" title="Undo"><span className="fa fa-undo" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-info button_spacing pull-left" aria-label="Redo" title="Redo"><span className="fa fa-repeat" aria-hidden="true"></span></button>
+                  <div className="vertical-line">&nbsp;</div>
                   <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure" onClick={this.saveMeasure.bind(this)}><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-danger" aria-label="Close" title="Close measure" onClick={this.handleCloseMeasure.bind(this)}><span className="fa fa-times-circle-o" aria-hidden="true"></span></button>
