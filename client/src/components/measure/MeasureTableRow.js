@@ -19,7 +19,32 @@ var TYPE_OPTIONS = [
   {id: 5, value: 'EI'}  
 ];
 
+var lineClassName = undefined;
+var disableButtonClassName = undefined;
+
 class MeasureTableRow extends Component {
+
+  constructor(){
+    super();
+    this.state = {
+      isDisabled: undefined
+    }
+  }
+
+  componentDidMount() {
+    this.setState({isDisabled: this.props.line.disabled});
+  }
+
+  toggleDisableLine(line_data) {
+    if (parseInt(this.state.isDisabled, 10) === 1) {
+      this.setState({isDisabled: 0});
+      line_data['disabled'] = "0";      
+    } else {
+      this.setState({isDisabled: 1});
+      line_data['disabled'] = "1";
+    }
+    this.onChangeLine(line_data.id, line_data);
+  }
 
   deleteLine(id){
     this.props.onDelLine(id);
@@ -30,8 +55,17 @@ class MeasureTableRow extends Component {
   }
 
   render() {
+
+    if (parseInt(this.state.isDisabled, 10) === 1) {
+      lineClassName = 'disabled_row';
+      disableButtonClassName = 'fa fa-eye line_buttons';
+    } else {
+      lineClassName = '';
+      disableButtonClassName = 'fa fa-eye-slash line_buttons';
+    }
+
     return (
-      <tr>
+      <tr className={lineClassName} ref="row">
         <td className="text-center">{this.props.row_index}</td>
         <td><MeasureLineTitleField name="function_name" line={this.props.line} value={this.props.line.function_name} _id={this.props.line.id} className="hundred_percent" onChange={this.onChangeLine.bind(this)}/></td>
         <td><MeasureSelectTableCell options={OPERATION_OPTIONS} name="operation" line={this.props.line} value={this.props.line.operation} _id={this.props.line.id} onChange={this.onChangeLine.bind(this)}/></td>
@@ -41,9 +75,10 @@ class MeasureTableRow extends Component {
         <td className="text-center">{this.props.line.cplx}</td>
         <td className="text-center">{this.props.line.ufp}</td>
         <td><MeasureLineNotes name="notes" line={this.props.line} value={this.props.line.notes} _id={this.props.line.id} className="hundred_percent" onChange={this.onChangeLine.bind(this)} /></td>
-        <td className="text-center" onClick={this.deleteLine.bind(this, this.props.line.id)}>
-          <span className="fa fa-trash line_buttons" aria-hidden="true" title="Delete"></span>
-        </td>
+        <td className="text-center">
+          <span className={disableButtonClassName} aria-hidden="true" title="Disable" onClick={this.toggleDisableLine.bind(this, this.props.line)}></span>
+          <span className="fa fa-trash-o" aria-hidden="true" title="Delete" onClick={this.deleteLine.bind(this, this.props.line.id)}></span>
+        </td>     
       </tr>
     );
   }

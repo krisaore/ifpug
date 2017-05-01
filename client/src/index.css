@@ -24,6 +24,10 @@
   border-radius: 35px;
 }
 
+.twentyfive_percent {
+  width: 25%;
+}
+
 .thirty_percent {
   width: 30%;
 }
@@ -100,3 +104,9 @@
 .logged-user {margin-right: 10px;}
 
 .line_buttons {padding: 0 5px; cursor: pointer;}
+
+.table-striped>tbody>tr:nth-of-type(odd).disabled_row,
+.table-striped>tbody>tr:nth-of-type(even).disabled_row
+ {
+  background-color: lightgray;
+}

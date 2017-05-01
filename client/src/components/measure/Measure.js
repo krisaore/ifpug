@@ -88,12 +88,14 @@ class Measure extends Component {
   }
 
   getTotalFPS() {
-    var total = _.sumBy(this.state.fp_lines, function(o) { return parseInt(o.ufp, 10); });
+    var total = _.sumBy(this.state.fp_lines, function(o) {
+      var ufp = o.disabled === "1" ? "0" : o.ufp;
+      return parseInt(ufp, 10);
+    });
     this.setState({total_fps: total });
   }
 
   calculate(data) {
-
     // check for zeros or empty values on dets and defaults it on 1
     if (data.det === "0" || data.det.length === 0) {
       data.det = "1";
@@ -128,7 +130,7 @@ class Measure extends Component {
   handleAddEmptyLine(){
     let fp_lines = this.state.fp_lines;
     fp_lines.push(
-		  {id: UUID.v4(), function_name: '', operation: 'ADD', type: 'ILF', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: ''}
+		  {id: UUID.v4(), function_name: '', operation: 'ADD', type: 'ILF', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: '', disabled: "0"}
 	  );
     this.setState({fp_lines:fp_lines});
   }

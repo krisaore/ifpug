@@ -22,7 +22,7 @@ class MeasureTable extends Component {
         <thead>
           <tr>
 			      <th className="text-center">#</th>
-            <th className="thirty_percent">Function name</th>
+            <th className="twentyfive_percent">Function name</th>
             <th>Operation</th>
             <th>Type</th>
             <th>RET/FTR</th>

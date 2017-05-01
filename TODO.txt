@@ -2,10 +2,10 @@
 - better use jwt token, e.g. use the expiration time
 
 ### future features ###
-- add an icon to disable a row
 - line reordering handle
 - undo management
 - user registration
+- measure sharing
 - xls export
 - welcome page
 - configuration
