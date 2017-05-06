@@ -1,14 +1,20 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
+
 class MeasureLineNotes extends Component {
 
   constructor(){
     super();
     this.state = {
-        value: '',
-	      line_data: {}
+      value: '',
+      line_data: {}
     }
   }
+
+	componentWillReceiveProps(nextProps) {
+		this.setState({value: nextProps.value});
+	}
 
   componentDidMount(){
     this.setState({value: this.props.value || ''});
@@ -16,14 +22,14 @@ class MeasureLineNotes extends Component {
   }  
 
   onChange(event) {
-		var curr_data = this.state.line_data;
-    curr_data['notes'] = event.target.value
+		var curr_data = _.cloneDeep(this.state.line_data);
+    curr_data['notes'] = event.target.value;
 		
-	  this.setState({value: event.target.value, line_data: curr_data}, function() {
-		  if (this.props.onChange !== undefined) {
-			  	this.props.onChange(this.props._id, this.state.line_data);
-		  }
-		});
+    if (this.props.onChange !== undefined) {
+        this.props.onChange(this.props._id, curr_data);
+    }
+
+	  this.setState({value: event.target.value, line_data: curr_data});
   }
 
   render() {

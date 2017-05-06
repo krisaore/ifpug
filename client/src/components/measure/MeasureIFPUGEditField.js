@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
+
 class MeasureIFPUGEditField extends Component {
 
   constructor(){
@@ -20,7 +22,7 @@ class MeasureIFPUGEditField extends Component {
   }  
 
   onChange(event) {
-		var curr_data = this.state.line_data;
+		var curr_data = _.cloneDeep(this.state.line_data);
 		switch (event.target.name) {
 				case 'det':
 					curr_data['det'] = event.target.value;
@@ -33,12 +35,11 @@ class MeasureIFPUGEditField extends Component {
 				default:
 				break;
 		}
-		
-	 this.setState({value: event.target.value, line_data: curr_data}, function() {
-			if (this.props.onChange !== undefined) {
-				this.props.onChange(this.props._id, this.state.line_data);
-			}
-		});
+
+		if (this.props.onChange !== undefined) {
+			this.props.onChange(this.props._id, curr_data);
+		}
+		this.setState({value: event.target.value, line_data: curr_data});
   }
 
   render() {

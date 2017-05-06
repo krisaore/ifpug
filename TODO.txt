@@ -1,8 +1,8 @@
 ### known bugs ###
 - better use jwt token, e.g. use the expiration time
+- still some issue with undo
 
 ### future features ###
-- undo management
 - line reordering handle
 - user registration
 - measure sharing

@@ -21,7 +21,8 @@ class Measure extends Component {
       fp_lines: [],
       measure_title: '',
       measure_id: undefined,
-      total_fps: 0
+      total_fps: 0,
+      undo_fp_lines: []
     }
   }
 
@@ -128,6 +129,8 @@ class Measure extends Component {
   }
 
   handleAddEmptyLine(){
+    this.backupLine();
+
     let fp_lines = this.state.fp_lines;
     fp_lines.push(
 		  {id: UUID.v4(), function_name: '', operation: 'ADD', type: 'ILF', ret_ftr: '', det: '', cplx: 'L', ufp: '', notes: '', disabled: "0"}
@@ -136,6 +139,8 @@ class Measure extends Component {
   }
   
   handleDeleteLine(id){
+    this.backupLine();
+
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
 
@@ -145,6 +150,8 @@ class Measure extends Component {
   }
 
   handleChangeLine(id, changed_data){
+    this.backupLine();
+
     let fp_lines = this.state.fp_lines;
     let index = fp_lines.findIndex(x => x.id === id);
 
@@ -161,9 +168,27 @@ class Measure extends Component {
 
   handleCloseMeasure() {
     this.props.handleCloseMeasure();
-  }  
-	
+  }
+
+  backupLine() {
+    let undo_fp_lines = this.state.undo_fp_lines;
+    undo_fp_lines.push(_.cloneDeep(this.state.fp_lines));
+    this.setState({undo_fp_lines: undo_fp_lines});
+  }
+
+  undo() {
+    var undo_fp_lines = this.state.undo_fp_lines;
+    var fp_lines = undo_fp_lines.pop();
+
+    this.setState({fp_lines: fp_lines, undo_fp_lines: undo_fp_lines}, function(){
+      this.getTotalFPS();
+    });
+  }
+
   render() {
+
+    var disabledUndo = this.state.undo_fp_lines.length > 0 ? '' : 'disabled';
+
     return (
           <div className="container">
             <div className="panel panel-default">
@@ -172,8 +197,7 @@ class Measure extends Component {
                   <strong className="title">Measure name: </strong><input type="text" className="fifty_percent" value={this.state.measure_title} placeholder="Please enter a name." onChange={this.handleChangedTitle.bind(this)}/>
                 </div>
                 <div className="panel-title pull-right">
-                  <button type="button" className="btn btn-info button_spacing pull-left" aria-label="Undo" title="Undo"><span className="fa fa-undo" aria-hidden="true"></span></button>
-                  <button type="button" className="btn btn-info button_spacing pull-left" aria-label="Redo" title="Redo"><span className="fa fa-repeat" aria-hidden="true"></span></button>
+                  <button disabled={disabledUndo} type="button" className="btn btn-info button_spacing pull-left" aria-label="Undo" title="Undo" onClick={this.undo.bind(this)}><span className="fa fa-undo" aria-hidden="true"></span></button>
                   <div className="vertical-line">&nbsp;</div>
                   <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure" onClick={this.saveMeasure.bind(this)}><span className="fa fa-floppy-o" aria-hidden="true"></span></button>

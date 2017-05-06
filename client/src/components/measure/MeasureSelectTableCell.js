@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import _ from 'lodash';
+
 class MeasureSelectTableCell extends Component {
 
   constructor(){
@@ -9,31 +11,35 @@ class MeasureSelectTableCell extends Component {
       }
   }
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({value: nextProps.value});
+	}  
+
   componentDidMount(){
 	  this.setState({line_data: this.props.line});
   } 
 
   onChange(event){
-	var curr_data = this.state.line_data;
+    var curr_data = _.cloneDeep(this.state.line_data);
 
-	switch (event.target.name) {
-			case 'type':
-				curr_data['type'] = event.target.value;
-			break;
+    switch (event.target.name) {
+        case 'type':
+          curr_data['type'] = event.target.value;
+        break;
 
-			case 'operation':
-				curr_data['operation'] = event.target.value;
-			break;
+        case 'operation':
+          curr_data['operation'] = event.target.value;
+        break;
 
-			default:
-			break;
-	}
-		
-	this.setState({value: event.target.value, line_data: curr_data}, function() {
-		if (this.props.onChange !== undefined) {
-			this.props.onChange(this.props._id, this.state.line_data);
-		}
-	});
+        default:
+        break;
+    }
+
+    if (this.props.onChange !== undefined) {
+      this.props.onChange(this.props._id, curr_data);
+    }
+    this.setState({value: event.target.value, line_data: curr_data});  
+
   }
 
   render() {
@@ -46,7 +52,7 @@ class MeasureSelectTableCell extends Component {
       });
     }
     return (
-        <select name={this.props.name} defaultValue={this.props.value} onChange={this.onChange.bind(this)} disabled={this.props.status}>{options}</select>
+        <select name={this.props.name} value={this.props.value} onChange={this.onChange.bind(this)} disabled={this.props.status}>{options}</select>
     );
   }
 }
