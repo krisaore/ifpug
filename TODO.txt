@@ -1,12 +1,12 @@
 ### known bugs ###
 - better use jwt token, e.g. use the expiration time
+- disable elements on disable line event
 
 ### future features ###
 - undo management
 - line reordering handle
 - user registration
 - measure sharing
-- at login -> press enter to login
 - xls export
 - welcome page
 - configuration

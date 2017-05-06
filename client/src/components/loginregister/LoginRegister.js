@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 
 class LoginRegister extends Component {
 
@@ -8,6 +9,22 @@ class LoginRegister extends Component {
 	      username: '',
           password: ''
       }
+  }
+
+  componentDidMount() {
+    $(document).on("keypress", this._handleEnterKey.bind(this));
+  }
+
+  componentWillUnmount() {
+    $(document).off('keypress');
+  }
+
+  _handleEnterKey(event) {
+    if(event.keyCode === 13){
+        event.preventDefault();
+        event.stopPropagation();
+        this.props.onLogin(this.state.username, this.state.password);        
+    }
   }
 
   changeUsername(event) {
