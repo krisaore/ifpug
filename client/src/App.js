@@ -26,8 +26,6 @@ class App extends Component {
   }
 
   login(username, password) {
-    console.log(username);
-    console.log(password);
     var _that = this;
 
     var data = {

@@ -28,7 +28,7 @@ class MeasureLineTitleField extends Component {
 
   render() {
     return (
-        <input type="text" name={this.props.name} className={this.props.className} value={this.state.value} onChange={this.onChange.bind(this)}/>
+        <input type="text" name={this.props.name} className={this.props.className} value={this.state.value} onChange={this.onChange.bind(this)} disabled={this.props.status}/>
     );
   }
 }

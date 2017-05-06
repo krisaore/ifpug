@@ -1,6 +1,5 @@
 ### known bugs ###
 - better use jwt token, e.g. use the expiration time
-- disable elements on disable line event
 
 ### future features ###
 - undo management
@@ -11,3 +10,4 @@
 - welcome page
 - configuration
 - i18n
+- modifiy README.md
