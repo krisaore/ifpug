@@ -198,6 +198,7 @@ class Measure extends Component {
                 </div>
                 <div className="panel-title pull-right">
                   <button disabled={disabledUndo} type="button" className="btn btn-info button_spacing pull-left" aria-label="Undo" title="Undo" onClick={this.undo.bind(this)}><span className="fa fa-undo" aria-hidden="true"></span></button>
+                  <button type="button" className="btn btn-info button_spacing pull-left" aria-label="Export" title="Export"><span className="fa fa-file-excel-o" aria-hidden="true"></span></button>                  
                   <div className="vertical-line">&nbsp;</div>
                   <button type="button" className="btn btn-info button_spacing" aria-label="Config" title="Configuration"><span className="fa fa-cog" aria-hidden="true"></span></button>
                   <button type="button" className="btn btn-success button_spacing" aria-label="Save" title="Save measure" onClick={this.saveMeasure.bind(this)}><span className="fa fa-floppy-o" aria-hidden="true"></span></button>
